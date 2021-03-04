@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "91479745326",
+    "project_id": "hexagon-3d0ec",
+    "storage_bucket": "hexagon-3d0ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91479745326:android:69382e80c040cd164c10bf",
+        "android_client_info": {
+          "package_name": "com.capstone.hexagon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91479745326-io19jr661icpjga92k4hrcmu9ve33llc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMBKz8uTUMDLt9xSrfUsmR8AjNI8kXrFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91479745326-io19jr661icpjga92k4hrcmu9ve33llc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
