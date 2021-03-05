@@ -18,11 +18,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AdditionalUserInfo;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
@@ -205,6 +207,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             // Sign in success
                             Log.d(GOOGLE_TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            // Determine if the user just signed up (new user) or signed in
+                            if (task.getResult().getAdditionalUserInfo().isNewUser()) {
+                                // User signed up, so add a Player instance in the database
+                                Player player = new Player(user.getDisplayName(), user.getEmail());
+                                FirebaseDatabase.getInstance().getReference("players")
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .setValue(player).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+                                            Toast.makeText(LoginActivity.this, "You have signed up successfully!", Toast.LENGTH_LONG).show();
+                                        }
+                                        else {
+                                            Toast.makeText(LoginActivity.this, "Sign up was unsuccessful, please try again.", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                });
+                            }
+
+                            // Otherwise, user signed in. No need to display a message.
+
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -216,6 +240,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         // ...
                     }
                 });
+    }
+
+    private void newUserSignUp() {
+
     }
 
     private void goToMainPage() {
