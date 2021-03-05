@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "91479745326",
+    "firebase_url": "https://hexagon-3d0ec-default-rtdb.firebaseio.com",
     "project_id": "hexagon-3d0ec",
     "storage_bucket": "hexagon-3d0ec.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "91479745326-4566fgf78an47bo98oftj8fnh7l6k3pa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.capstone.hexagon",
+            "certificate_hash": "0ed6c47b4a92e33f429570f69645f45014510115"
+          }
+        },
         {
           "client_id": "91479745326-io19jr661icpjga92k4hrcmu9ve33llc.apps.googleusercontent.com",
           "client_type": 3
@@ -27,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "91479745326-io19jr661icpjga92k4hrcmu9ve33llc.apps.googleusercontent.com",
+              "client_id": "91479745326-bkaqst2el15e197vih685gt1n375l2le.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

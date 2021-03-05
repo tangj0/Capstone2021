@@ -63,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.tvTitle){
-            startActivity(new Intent(this, LoginActivity.class));
+            goToLoginPage();
         }
         else if (v.getId() == R.id.btnSignUp){
             signUp();
@@ -78,29 +78,27 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String password = editTextPassword.getText().toString().trim();
         String confirmPassword = editTextConfirmPassword.getText().toString().trim();
 
-        if (name.isEmpty()){
+        // Validate the name
+        if (name.isEmpty()) {
             editTextName.setError("Please enter your name");
             editTextName.requestFocus();
             return;
         }
 
-        if (email.isEmpty()){
-            editTextEmail.setError("Please enter your email");
+        // Validate the email address
+        try {
+            validateEmail(email);
+        } catch (IllegalArgumentException e) {
+            editTextEmail.setError(e.getMessage());
             editTextEmail.requestFocus();
             return;
         }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            Toast.makeText(SignUpActivity.this,"Email address is invalid",Toast.LENGTH_SHORT).show();
-            return;
-        }
 
-        if (password.isEmpty()){
-            editTextPassword.setError("Please enter a password");
-            editTextPassword.requestFocus();
-            return;
-        }
-        if (password.length() < 6){ //firebase requires this
-            editTextPassword.setError("Minimum password length must be 6 characters");
+        // Validate the password
+        try {
+            validatePassword(password);
+        } catch (IllegalArgumentException e) {
+            editTextPassword.setError(e.getMessage());
             editTextPassword.requestFocus();
             return;
         }
@@ -110,6 +108,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             editTextConfirmPassword.requestFocus();
             return;
         }
+
         if (!password.equals(confirmPassword)){
             Toast.makeText(SignUpActivity.this,"Passwords do not match",Toast.LENGTH_SHORT).show();
             return;
@@ -145,5 +144,39 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         }
                     }
                 });
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    public static void validateEmail(String email) {
+        if (email.isEmpty()) {
+            throw new IllegalArgumentException("Please enter your email");
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            throw new IllegalArgumentException("Email address is invalid");
+        }
+    }
+
+    public static void validatePassword(String password) {
+        if (password.isEmpty()){
+            throw new IllegalArgumentException("Please enter a password");
+        }
+
+        if (password.length() < 6){ //firebase requires this
+            throw new IllegalArgumentException("Minimum password length must be 6 characters");
+        }
+    }
+
+    public static boolean validateName(String name) {
+        if (name.isEmpty()){
+            return false;
+        }
+
+        return true;
+    }
+
+    private void goToLoginPage() {
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 }
