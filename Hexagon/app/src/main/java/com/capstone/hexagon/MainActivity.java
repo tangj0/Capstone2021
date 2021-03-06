@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         // Logout button is clicked
         if (v.getId() == R.id.btnLogout){
-            // Sign out the user from Google
+            // Sign out the user
             FirebaseAuth.getInstance().signOut();
 
             // Go to the login page
