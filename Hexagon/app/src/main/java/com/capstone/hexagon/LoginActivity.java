@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
 
@@ -212,9 +213,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             if (task.getResult().getAdditionalUserInfo().isNewUser()) {
                                 // User signed up, so add a Player instance in the database
                                 Player player = new Player(user.getDisplayName(), user.getEmail());
-                                FirebaseDatabase.getInstance().getReference("players")
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .setValue(player).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                FirebaseFirestore.getInstance().collection("players")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .set(player).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()){

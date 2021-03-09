@@ -125,21 +125,20 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
                                         Toast.makeText(SignUpActivity.this, "You have signed up successfully!", Toast.LENGTH_LONG).show();
-                                        progressBar.setVisibility(View.INVISIBLE);
+                                        //progressBar.setVisibility(View.INVISIBLE);
                                     }
                                     else {
-                                        Toast.makeText(SignUpActivity.this, "Sign up was unsuccessful, please try again 1.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SignUpActivity.this, "Sign up was unsuccessful, please try again (Error code 1).", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
-
                         }
                         else {
-                            Toast.makeText(SignUpActivity.this, "Sign up was unsuccessful, please try again 2.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUpActivity.this, "Sign up was unsuccessful, please try again (Error code 2).", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-//        progressBar.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     public static void validateEmail(String email) {

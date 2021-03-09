@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
 
         title = (TextView) findViewById(R.id.title);
+        //title.append("\nHello " + FirebaseFirestore.getInstance().collection("players").document(mAuth.getCurrentUser().getUid()).get().);
 
         logout = (Button) findViewById(R.id.btnLogout);
         logout.setOnClickListener(this);
