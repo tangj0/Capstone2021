@@ -15,6 +15,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true  //to fix "Cannot fit requested classes in a single dex file (# methods: 93843 > 65536)"
     }
 
     buildTypes {
@@ -30,11 +32,13 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.multidex:multidex:2.0.1' //to fix "Cannot fit requested classes in a single dex file (# methods: 93843 > 65536)"
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    implementation 'com.google.firebase:firebase-firestore:22.1.1'
     apply plugin: 'com.google.gms.google-services'
     implementation 'com.google.firebase:firebase-auth:20.0.3'
     implementation 'com.google.firebase:firebase-database:19.3.0'

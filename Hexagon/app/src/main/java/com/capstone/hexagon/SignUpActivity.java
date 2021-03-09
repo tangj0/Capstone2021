@@ -1,12 +1,7 @@
 package com.capstone.hexagon;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
-import android.provider.ContactsContract;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -15,24 +10,27 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
 
     private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private String playerID;
 
     private Button signUp;
     private TextView title;
     private EditText editTextName, editTextEmail, editTextPassword, editTextConfirmPassword;
     private ProgressBar progressBar;
-
-//    private FirebaseDatabase database;
-//    private DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("myMessage");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +38,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
-//        database = FirebaseDatabase.getInstance();
-//        mRef = database.getReference("myMessage");
 
         title = (TextView) findViewById(R.id.tvTitle);
         title.setOnClickListener(this); //use this to bring user back to login page by clicking on title Hexagon
@@ -67,8 +63,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
         else if (v.getId() == R.id.btnSignUp){
             signUp();
-//            String message = "Hello World!";
-//            mRef.push().setValue(message);
         }
     }
 
@@ -121,30 +115,31 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Player player = new Player(name, email);
+                            playerID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            DocumentReference documentReference = FirebaseFirestore.getInstance().collection("players").document(playerID);
+                            documentReference.set(player).addOnCompleteListener(new OnCompleteListener<Void>() {
 
-                            FirebaseDatabase.getInstance().getReference("players")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(player).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-
                                     if (task.isSuccessful()){
                                         Toast.makeText(SignUpActivity.this, "You have signed up successfully!", Toast.LENGTH_LONG).show();
+                                        progressBar.setVisibility(View.INVISIBLE);
                                     }
                                     else {
-                                        Toast.makeText(SignUpActivity.this, "Sign up was unsuccessful, please try again.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SignUpActivity.this, "Sign up was unsuccessful, please try again 1.", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
+
                         }
                         else {
-                            Toast.makeText(SignUpActivity.this, "Sign up was unsuccessful, please try again.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUpActivity.this, "Sign up was unsuccessful, please try again 2.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-        progressBar.setVisibility(View.INVISIBLE);
+//        progressBar.setVisibility(View.INVISIBLE);
     }
 
     public static void validateEmail(String email) {
