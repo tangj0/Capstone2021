@@ -1,8 +1,5 @@
 package com.capstone.hexagon;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +8,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -18,15 +18,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AdditionalUserInfo;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView signUp;
@@ -43,12 +40,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private FirebaseAuth mAuth;
 
+    private TextView rate; //TODO: temporary, move to camera page later
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         // Buttons
+        rate = (TextView)findViewById(R.id.btnRateImages);
+        rate.setOnClickListener(this);
+
         signUp = (TextView)findViewById(R.id.btnGoToSignUp);
         signUp.setOnClickListener(this);
         signUp = (TextView)findViewById(R.id.btnLogin);
@@ -116,6 +118,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Login button is clicked
         else if (v.getId() == R.id.btnLogin) {
             signInWithEmailAndPassword(editTextEmail.getText().toString().trim(), editTextPassword.getText().toString().trim());
+        }
+        // Temporary button to see Rate images page
+        else if (v.getId() == R.id.btnRateImages){
+            goToRatePage();
         }
     }
 
@@ -253,6 +259,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void goToSignUpPage() {
         startActivity(new Intent(this, SignUpActivity.class));
+        finish();
+    }
+
+    private void goToRatePage() {
+        startActivity(new Intent(this, RateActivity.class));
         finish();
     }
 }

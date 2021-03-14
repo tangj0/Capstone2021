@@ -11,5 +11,7 @@
     <!-- Colors for Login -->
     <color name="LoginScreenGreen">#072122</color>
     <color name="FluoTeal">#00DAE7</color>
+    <color name="blue">#26A7FD</color>
+    <color name="Grey">#C4C4C4</color>
 
 </resources>
