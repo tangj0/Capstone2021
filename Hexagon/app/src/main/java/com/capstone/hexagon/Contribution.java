@@ -10,18 +10,17 @@ public class Contribution {
 
     private GarbageType garbageType;
     private int garbageAmount;
-    private int beforeImg; //TODO: change to url? later
-    private int afterImg;
+    private String beforeImg;
+    private String afterImg;
     private Date date;
-    private boolean approved;
+    private boolean overallApproval;
 
-    public Contribution(GarbageType garbageType, int garbageAmount, int beforeImg, int afterImg, Date date, boolean approved) {
+    public Contribution(GarbageType garbageType, int garbageAmount, String beforeImg, String afterImg, Date date) {
         this.garbageType = garbageType;
         this.garbageAmount = garbageAmount;
         this.beforeImg = beforeImg;
         this.afterImg = afterImg;
         this.date = date;
-        this.approved = approved;
     }
 
     public Contribution() {
@@ -43,19 +42,19 @@ public class Contribution {
         this.garbageAmount = garbageAmount;
     }
 
-    public int getBeforeImg() {
+    public String getBeforeImg() {
         return beforeImg;
     }
 
-    public void setBeforeImg(int beforeImg) {
+    public void setBeforeImg(String beforeImg) {
         this.beforeImg = beforeImg;
     }
 
-    public int getAfterImg() {
+    public String getAfterImg() {
         return afterImg;
     }
 
-    public void setAfterImg(int afterImg) {
+    public void setAfterImg(String afterImg) {
         this.afterImg = afterImg;
     }
 
@@ -67,11 +66,12 @@ public class Contribution {
         this.date = date;
     }
 
-    public boolean isApproved() {
-        return approved;
+    public boolean overallApproval() {
+        return overallApproval;
     }
 
-    public void setApproved(boolean approved) {
-        this.approved = approved;
+    public void setOverallApproval(boolean overallApproval) {
+        this.overallApproval = overallApproval;
     }
+
 }

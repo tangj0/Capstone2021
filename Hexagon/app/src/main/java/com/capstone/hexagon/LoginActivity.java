@@ -23,7 +23,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -41,18 +40,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private FirebaseAuth mAuth;
 
-    private TextView rate; //TODO: temporary, move to camera page later
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         // Buttons
-        rate = (TextView)findViewById(R.id.btnRateImages);
-        rate.setOnClickListener(this);
-
-        signUp = (TextView)findViewById(R.id.btnGoToSignUp);
+        signUp = (TextView)findViewById(R.id.btnRateImages);
         signUp.setOnClickListener(this);
         signUp = (TextView)findViewById(R.id.btnLogin);
         signUp.setOnClickListener(this);
@@ -108,7 +102,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         // Sign up button is clicked
-        if (v.getId() == R.id.btnGoToSignUp){
+        if (v.getId() == R.id.btnRateImages){
             // Go to the Sign up page
             goToSignUpPage();
         }
@@ -120,10 +114,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         else if (v.getId() == R.id.btnLogin) {
             signInWithEmailAndPassword(editTextEmail.getText().toString().trim(), editTextPassword.getText().toString().trim());
         }
-        // Temporary button to see Rate images page
-        else if (v.getId() == R.id.btnRateImages){
-            goToRatePage();
-        }
+
     }
 
     private void signInWithEmailAndPassword(String email, String password) {
@@ -263,8 +254,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         finish();
     }
 
-    private void goToRatePage() {
-        startActivity(new Intent(this, RateActivity.class));
-        finish();
-    }
 }

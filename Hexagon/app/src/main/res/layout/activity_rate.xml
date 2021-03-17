@@ -19,7 +19,7 @@
             android:id="@+id/tvRateTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="5dp"
             android:text="Rate Contribution"
             android:textSize="25sp" />
 
@@ -30,7 +30,7 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="270dp" />
+            android:layout_height="220dp" />
 
         <LinearLayout
             android:id="@+id/horizontal_layout1"
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Type" />
+                android:text="Placeholder" />
         </LinearLayout>
 
         <LinearLayout
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:text="Placeholder" />
         </LinearLayout>
 
         <LinearLayout
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="March 1st, 2021" />
+                android:text="Placeholder" />
         </LinearLayout>
 
         <LinearLayout
@@ -135,6 +135,52 @@
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine"/>
+
+        <Button
+            android:id="@+id/btnSubmitRating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit Rating" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnBeforeImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Upload Before " />
+
+            <Button
+                android:id="@+id/btnAfterImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Upload After " />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnUploadContribution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add Contribution" />
+
+            <Button
+                android:id="@+id/btnRetrieveContribution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Get Contribution" />
+        </LinearLayout>
 
     </LinearLayout>
 

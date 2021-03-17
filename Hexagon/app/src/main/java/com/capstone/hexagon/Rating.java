@@ -1,21 +1,31 @@
 package com.capstone.hexagon;
 
-public class Comment {
+public class Rating {
+    private boolean approval;
     private String comment;
     private int likes;
 
-    public Comment(String comment, int likes) {
+    public Rating(boolean approval, String comment, int likes) {
+        this.approval = approval;
         this.comment = comment;
         this.likes = likes;
     }
 
-    public Comment(String comment){
+    public Rating(boolean approval, String comment) {
+        this.approval = approval;
         this.comment = comment;
         this.likes = 0;
     }
 
-    public Comment(){
+    public Rating() {
+    }
 
+    public boolean isApproval() {
+        return approval;
+    }
+
+    public void setApproval(boolean approval) {
+        this.approval = approval;
     }
 
     public String getComment() {

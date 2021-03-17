@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -20,6 +19,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button logout;
     private TextView title;
+
+    private TextView rate; //TODO: temporary, move to camera page later
 
     GoogleSignInClient mGoogleSignInClient;
     GoogleSignInOptions gso;
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         logout = (Button) findViewById(R.id.btnLogout);
         logout.setOnClickListener(this);
+
+        rate = (TextView)findViewById(R.id.btnRateImages);
+        rate.setOnClickListener(this);
     }
 
     //using if statements instead of switch because of this warning:
@@ -50,10 +54,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // Go to the login page
             goToLoginPage();
         }
+        // Temporary button to see Rate images page
+        else if (v.getId() == R.id.btnRateImages){
+            goToRatePage();
+        }
     }
 
     private void goToLoginPage() {
         startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
+
+    private void goToRatePage() {
+        startActivity(new Intent(this, RateActivity.class));
+        finish();
+    }
+
 }

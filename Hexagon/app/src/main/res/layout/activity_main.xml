@@ -7,31 +7,57 @@
     android:background="@color/black"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/linearLayout">
 
     <!--Adding textAlignment="center" fixes off center blueprint screen-->
+
     <TextView
         android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
         android:gravity="center"
         android:text="@string/hexagon"
         android:textAlignment="center"
         android:textSize="38sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_conversion_absoluteHeight="51dp"
+        tools:layout_editor_absoluteY="316dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_conversion_absoluteWidth="411dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
 
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
         android:text="@string/logout"
         android:textAllCaps="false"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:layout_conversion_absoluteHeight="50dp"
+        tools:layout_editor_absoluteY="397dp"
+        tools:layout_editor_absoluteX="182dp"
+        tools:layout_conversion_absoluteWidth="88dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <Button
+        android:id="@+id/btnRateImages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rate Images (Temp)"
+        tools:layout_conversion_absoluteHeight="48dp"
+        tools:layout_conversion_absoluteWidth="411dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="447dp" />
+
 
 </LinearLayout>
