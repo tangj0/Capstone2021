@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.capstone.hexagon">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- for image storage, sdcard and internal -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- for image storage, sdcard and internal -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
@@ -17,6 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Hexagon">
+        <activity
+            android:name=".UploadActivity"
+            android:label="@string/title_activity_upload"
+            android:theme="@style/Theme.Hexagon.NoActionBar"></activity>
         <!-- Note: Every Activity needs to be in this manifest file -->
         <activity
             android:name=".LoginActivity"

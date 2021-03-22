@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth mAuth;
 
     private Button logout;
+    private Button upload;
     private TextView title;
 
     private TextView rate; //TODO: temporary, move to camera page later
@@ -40,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         rate = (TextView)findViewById(R.id.btnRateImages);
         rate.setOnClickListener(this);
+
+        upload = (Button)findViewById(R.id.btnUploadImages);
+        upload.setOnClickListener(this);
     }
 
     //using if statements instead of switch because of this warning:
@@ -58,6 +62,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (v.getId() == R.id.btnRateImages){
             goToRatePage();
         }
+        // Temporary button to see upload images page
+        else if (v.getId() == R.id.btnUploadImages) {
+            goToUploadPage();
+        }
     }
 
     private void goToLoginPage() {
@@ -70,4 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         finish();
     }
 
+    private void goToUploadPage() {
+        startActivity(new Intent(this, UploadActivity.class));
+        finish();
+    }
 }

@@ -59,5 +59,15 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="447dp" />
 
+    <Button
+        android:id="@+id/btnUploadImages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Images (Temp)"
+        tools:layout_conversion_absoluteHeight="48dp"
+        tools:layout_conversion_absoluteWidth="411dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="447dp" />
+
 
 </LinearLayout>
