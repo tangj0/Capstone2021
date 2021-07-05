@@ -4,6 +4,8 @@ public class Rating {
     private boolean approval;
     private String comment;
     private int likes;
+    private Contribution contribution; // rated contribution
+    private Player ratingAuthor;
 
     public Rating(boolean approval, String comment, int likes) {
         this.approval = approval;

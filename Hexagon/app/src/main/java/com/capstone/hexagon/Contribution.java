@@ -10,18 +10,18 @@ public class Contribution {
 
     private GarbageType garbageType;
     private int garbageAmount;
+    private Date currentTime;
     private String beforeImg;
     private String afterImg;
-    private Date date;
-    private boolean overallApproval;
+    private int maxRatings;
+    private boolean finalRating;
+    private int[] ratingIDs;
 
-    public Contribution(GarbageType garbageType, int garbageAmount, String beforeImg, String afterImg, Date date) {
-        this.garbageType = garbageType;
-        this.garbageAmount = garbageAmount;
-        this.beforeImg = beforeImg;
-        this.afterImg = afterImg;
-        this.date = date;
-    }
+//    public Contribution(GarbageType garbageType, int garbageAmount, Date currentTime) {
+//        this.garbageType = garbageType;
+//        this.garbageAmount = garbageAmount;
+//        this.currentTime = currentTime;
+//    }
 
     public Contribution() {
     }
@@ -58,20 +58,20 @@ public class Contribution {
         this.afterImg = afterImg;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCurrentTime() {
+        return currentTime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCurrentTime(Date currentTime) {
+        this.currentTime = currentTime;
     }
 
     public boolean overallApproval() {
-        return overallApproval;
+        return finalRating;
     }
 
-    public void setOverallApproval(boolean overallApproval) {
-        this.overallApproval = overallApproval;
+    public void setFinalRating(boolean finalRating) {
+        this.finalRating = finalRating;
     }
 
 }

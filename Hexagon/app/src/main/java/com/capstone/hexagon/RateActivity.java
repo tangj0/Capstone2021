@@ -25,15 +25,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 
 public class RateActivity extends AppCompatActivity implements View.OnClickListener {
+    private Count currentCount;
+    private int contributionID;
 
     private Button btnUploadBefore;
     private Button btnUploadAfter;
@@ -82,26 +87,30 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
         playerID = player.getUid();
 
         storageReference = FirebaseStorage.getInstance().getReference();
+        fStore = FirebaseFirestore.getInstance();
 
         contribution = new Contribution();
+
     }
 
     private void uploadDummyContribution(){ //Upload to Firestore
+        Date currentTime = Calendar.getInstance().getTime();
+//        contribution = new Contribution(Contribution.GarbageType.MASK, 1, currentTime); // don't do this, image paths will stay null
         contribution.setGarbageType(Contribution.GarbageType.MASK);
         contribution.setGarbageAmount(1);
-        contribution.setOverallApproval(false);
-        Date date = new Date(2021, 3, 17); //TODO: fix Date, use DateTime I Think...
-        contribution.setDate(date);
-//        contribution.setOverallApproval(false); //don't have to set this yet
+        contribution.setCurrentTime(currentTime);
 
-        UUID contributionID = UUID.randomUUID();
-        String strContUUID = contributionID.toString();
+//        UUID contributionID = UUID.randomUUID();
+//        String strContUUID = contributionID.toString();
+        contributionID = getCount();
+        setCount(contributionID + 1);
+        String strContUUID = Integer.toString(contributionID);
 
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Uploading");
         pd.show();
 
-        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("contributions").document(playerID).collection("unrated").document(strContUUID);
+        DocumentReference documentReference = fStore.collection("contributions").document(playerID).collection("unrated").document(strContUUID);
         documentReference.set(contribution).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -114,6 +123,56 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+    }
+
+    private int getCount(){
+        currentCount = new Count();
+
+        DocumentReference documentReference = fStore.collection("counts").document("contributionsCount");
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        if (document.exists()) {
+                            Map<String, Object> map = document.getData();
+//                            if (map.size() == 0) {
+//                                Log.d("EMPTY_DOC", "Document is empty");
+//                            } else {
+//                                Log.d("NON-EMPTY_DOC", "Document is not empty");
+//                                currentCount.setCount(Integer.getInteger(map.toString()));
+//                            }
+                            Log.d("MAP", String.valueOf(document.getData().get("count")));
+                            String val = String.valueOf(document.getData().get("count"));
+                            Log.d("VAL", val);
+                            currentCount.setCount(Integer.parseInt(val));
+
+                        } else {
+                            Log.d("DOESN'T_EXIST", "Document doesn't exist");
+
+                            documentReference.set(currentCount);
+                            currentCount.setCount(0);
+
+                        }
+                    }
+                    else {
+                        Log.d("NULL", "Document is null");
+                    }
+                }
+            }
+        });
+
+        Log.d("COUNT", String.valueOf(currentCount.getCount()));
+        return currentCount.getCount();
+
+    }
+
+    private void setCount(int newID){
+        currentCount = new Count();
+        currentCount.setCount(newID);
+        DocumentReference documentReference = fStore.collection("counts").document("contributionsCount");
+        documentReference.set(currentCount);
     }
 
     //TODO
@@ -204,6 +263,9 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if (v.getId() == R.id.btnUploadContribution){
             uploadDummyContribution();
+        }
+        else if (v.getId() == R.id.btnRetrieveContribution){ //TODO: only temp test
+            getCount();
         }
     }
 }
