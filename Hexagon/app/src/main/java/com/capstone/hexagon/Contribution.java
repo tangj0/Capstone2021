@@ -1,6 +1,10 @@
 package com.capstone.hexagon;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Contribution {
     enum GarbageType {
@@ -10,21 +14,24 @@ public class Contribution {
 
     private GarbageType garbageType;
     private int garbageAmount;
+    private HashMap<String, Object> timeStamp;
     private String beforeImg;
     private String afterImg;
-    private Date date;
-    private boolean overallApproval;
+    private int maxRatings;
+    private boolean finalRating;
+    private int[] ratingIDs;
 
-    public Contribution(GarbageType garbageType, int garbageAmount, String beforeImg, String afterImg, Date date) {
+
+    public Contribution(GarbageType garbageType, int garbageAmount, String beforeImg, String afterImg) {
         this.garbageType = garbageType;
         this.garbageAmount = garbageAmount;
         this.beforeImg = beforeImg;
         this.afterImg = afterImg;
-        this.date = date;
     }
 
     public Contribution() {
     }
+
 
     public GarbageType getGarbageType() {
         return garbageType;
@@ -58,20 +65,46 @@ public class Contribution {
         this.afterImg = afterImg;
     }
 
-    public Date getDate() {
-        return date;
+    public int getMaxRatings() {
+        return maxRatings;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setMaxRatings(int maxRatings) {
+        this.maxRatings = maxRatings;
     }
 
-    public boolean overallApproval() {
-        return overallApproval;
+    public boolean isFinalRating() {
+        return finalRating;
     }
 
-    public void setOverallApproval(boolean overallApproval) {
-        this.overallApproval = overallApproval;
+    public void setFinalRating(boolean finalRating) {
+        this.finalRating = finalRating;
     }
+
+    public int[] getRatingIDs() {
+        return ratingIDs;
+    }
+
+    public void setRatingIDs(int[] ratingIDs) {
+        this.ratingIDs = ratingIDs;
+    }
+
+    public HashMap<String, Object> getTimeStamp() {
+        return timeStamp;
+    }
+
+//    @Exclude
+//    public long getTimeStampLong(){
+//        return (long)timeStamp.get("timestamp");
+//    }
+
+    public void setTimeStamp(HashMap<String, Object> timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+
+
+
+
 
 }

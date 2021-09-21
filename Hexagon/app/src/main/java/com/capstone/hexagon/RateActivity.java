@@ -22,15 +22,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class RateActivity extends AppCompatActivity implements View.OnClickListener {
@@ -89,10 +95,15 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
     private void uploadDummyContribution(){ //Upload to Firestore
         contribution.setGarbageType(Contribution.GarbageType.MASK);
         contribution.setGarbageAmount(1);
-        contribution.setOverallApproval(false);
-        Date date = new Date(2021, 3, 17); //TODO: fix Date, use DateTime I Think...
-        contribution.setDate(date);
-//        contribution.setOverallApproval(false); //don't have to set this yet
+        contribution.setFinalRating(false);
+//        Date date = new Date(2021, 3, 17); //TODO: fix Date, use DateTime I Think...
+
+        HashMap<String, Object> timestamp = new HashMap<>();
+
+        timestamp.put("this", FieldValue.serverTimestamp());
+        contribution.setTimeStamp(timestamp);
+
+
 
         UUID contributionID = UUID.randomUUID();
         String strContUUID = contributionID.toString();
