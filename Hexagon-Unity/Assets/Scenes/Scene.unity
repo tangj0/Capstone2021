@@ -207,6 +207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 138150544}
+  - component: {fileID: 138150545}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -237,6 +238,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &138150545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138150543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4306e4b2cb83b646828d0680bc05d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &354502393
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,6 +453,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 651639584}
+  - component: {fileID: 651639585}
   m_Layer: 5
   m_Name: Icons
   m_TagString: Untagged
@@ -473,6 +487,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &651639585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651639583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5af3b53fec29f498ca76ea65a6ac9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterBalanceText: {fileID: 1245044478}
+  oxygenBalanceText: {fileID: 685890751}
+  energyBalanceText: {fileID: 1620825105}
 --- !u!1 &670387657
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +589,7 @@ GameObject:
   - component: {fileID: 685890752}
   - component: {fileID: 685890751}
   m_Layer: 5
-  m_Name: OxygenAmount
+  m_Name: OxygenBalanceText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -938,7 +967,7 @@ GameObject:
   - component: {fileID: 1245044479}
   - component: {fileID: 1245044478}
   m_Layer: 5
-  m_Name: WaterAmount
+  m_Name: WaterBalanceText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1017,7 +1046,7 @@ GameObject:
   - component: {fileID: 1620825106}
   - component: {fileID: 1620825105}
   m_Layer: 5
-  m_Name: EnergyAmount
+  m_Name: EnergyBalanceText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1095,6 +1124,7 @@ GameObject:
   - component: {fileID: 1813009786}
   - component: {fileID: 1813009788}
   - component: {fileID: 1813009787}
+  - component: {fileID: 1813009789}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -2248,6 +2278,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1813009789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813009785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1a265599527a544bdbaa8296db9a80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1962718524
 GameObject:
   m_ObjectHideFlags: 0
