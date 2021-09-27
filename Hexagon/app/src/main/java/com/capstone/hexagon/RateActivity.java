@@ -94,16 +94,11 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
 
     private void uploadDummyContribution(){ //Upload to Firestore
         contribution.setGarbageType(Contribution.GarbageType.MASK);
-        contribution.setGarbageAmount(1);
+//        contribution.setGarbageAmount(1);
         contribution.setFinalRating(false);
-//        Date date = new Date(2021, 3, 17); //TODO: fix Date, use DateTime I Think...
 
-        HashMap<String, Object> timestamp = new HashMap<>();
-
-        timestamp.put("this", FieldValue.serverTimestamp());
-        contribution.setTimeStamp(timestamp);
-
-
+        FieldValue timeStamp = FieldValue.serverTimestamp();
+        contribution.setTimeStamp(timeStamp);
 
         UUID contributionID = UUID.randomUUID();
         String strContUUID = contributionID.toString();

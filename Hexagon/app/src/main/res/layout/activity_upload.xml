@@ -25,10 +25,6 @@
             android:text="Create Contribution"
             android:textSize="25sp" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="15dp" />
-
         <LinearLayout
             android:id="@+id/layout_upload_buttons"
             android:layout_height="wrap_content"
@@ -60,7 +56,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_view_before_image"
             android:layout_width="match_parent"
-            android:layout_height="220dp" />
+            android:layout_height="200dp" />
 
         <TextView
             android:id="@+id/text_view_after_image"
@@ -73,7 +69,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_view_after_image"
             android:layout_width="match_parent"
-            android:layout_height="220dp" />
+            android:layout_height="200dp" />
 
         <LinearLayout
             android:id="@+id/select_garbage_type_layout"
@@ -86,10 +82,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Select garbage type:" />
+                android:text="Garbage Type:" />
 
             <Spinner
-                android:id="@+id/GarbageTypeOptions"
+                android:id="@+id/garbageTypeOptions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/btn_dropdown"
@@ -98,7 +94,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/BtnSubmitContribution"
+            android:id="@+id/btnSubmitContribution"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" android:text="Submit Contribution">

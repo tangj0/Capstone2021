@@ -1,6 +1,7 @@
 package com.capstone.hexagon;
 
 import com.google.firebase.database.Exclude;
+import com.google.firebase.firestore.FieldValue;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -13,8 +14,8 @@ public class Contribution {
     }
 
     private GarbageType garbageType;
-    private int garbageAmount;
-    private HashMap<String, Object> timeStamp;
+//    private int garbageAmount;
+    private FieldValue timeStamp;
     private String beforeImg;
     private String afterImg;
     private int maxRatings;
@@ -22,9 +23,8 @@ public class Contribution {
     private int[] ratingIDs;
 
 
-    public Contribution(GarbageType garbageType, int garbageAmount, String beforeImg, String afterImg) {
+    public Contribution(GarbageType garbageType, String beforeImg, String afterImg) {
         this.garbageType = garbageType;
-        this.garbageAmount = garbageAmount;
         this.beforeImg = beforeImg;
         this.afterImg = afterImg;
     }
@@ -41,13 +41,13 @@ public class Contribution {
         this.garbageType = garbageType;
     }
 
-    public int getGarbageAmount() {
-        return garbageAmount;
-    }
-
-    public void setGarbageAmount(int garbageAmount) {
-        this.garbageAmount = garbageAmount;
-    }
+//    public int getGarbageAmount() {
+//        return garbageAmount;
+//    }
+//
+//    public void setGarbageAmount(int garbageAmount) {
+//        this.garbageAmount = garbageAmount;
+//    }
 
     public String getBeforeImg() {
         return beforeImg;
@@ -89,21 +89,22 @@ public class Contribution {
         this.ratingIDs = ratingIDs;
     }
 
-    public HashMap<String, Object> getTimeStamp() {
+    public FieldValue getTimeStamp() {
         return timeStamp;
     }
 
-//    @Exclude
-//    public long getTimeStampLong(){
-//        return (long)timeStamp.get("timestamp");
-//    }
-
-    public void setTimeStamp(HashMap<String, Object> timeStamp) {
+    public void setTimeStamp(FieldValue timeStamp) {
         this.timeStamp = timeStamp;
     }
 
-
-
+    public GarbageType getGarbageTypeFromString(String str){
+        for (GarbageType garbageType : GarbageType.values()) {
+            if (garbageType.toString().replaceAll("_", " ").equalsIgnoreCase(str)){
+                return garbageType;
+            }
+        }
+        return null;
+    }
 
 
 
