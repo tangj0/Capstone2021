@@ -5,16 +5,9 @@ public class Rating {
     private String comment;
     private int likes;
 
-    public Rating(boolean approval, String comment, int likes) {
-        this.approval = approval;
-        this.comment = comment;
-        this.likes = likes;
-    }
-
     public Rating(boolean approval, String comment) {
         this.approval = approval;
         this.comment = comment;
-        this.likes = 0;
     }
 
     public Rating() {
