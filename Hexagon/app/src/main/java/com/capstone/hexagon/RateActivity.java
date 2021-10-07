@@ -1,58 +1,34 @@
 package com.capstone.hexagon;
 
-import android.app.ProgressDialog;
-import android.content.ContentResolver;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import org.w3c.dom.Document;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class RateActivity extends AppCompatActivity implements View.OnClickListener {
     private Button retrieveContribution, submitRating;
@@ -114,8 +90,11 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private Task<QuerySnapshot> getContributions(){
-        CollectionReference collectionReference = fStore.collection("contributions").document(playerID).collection("unrated");
+    private void getContributions(){
+//        CollectionReference collectionReference = fStore.collection("contributions").document(playerID).collection("unrated");
+        CollectionReference collectionReference = fStore.collection("contributions");
+
+
 //        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
 //            @Override
 //            public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException error) {
@@ -131,36 +110,58 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
 //        });
 
 
-        Task<QuerySnapshot> temp = collectionReference.get();
-        List<DocumentSnapshot> documents = temp.getResult().getDocuments();
-        for (DocumentSnapshot document : documents) {
-//            DocumentSnapshot.ServerTimestampBehavior behavior = DocumentSnapshot.ServerTimestampBehavior.ESTIMATE;
-//            Date date = document.getDate("timeStamp", behavior);
-//            Contribution contribution = document.toObject(Contribution.class, behavior);
-//            Contribution contribution = document.toObject(Contribution.class);
+//        Task<QuerySnapshot> temp = collectionReference.get();
+//        List<DocumentSnapshot> documents = temp.getResult().getDocuments();
+//        for (DocumentSnapshot document : documents) {
+////            DocumentSnapshot.ServerTimestampBehavior behavior = DocumentSnapshot.ServerTimestampBehavior.ESTIMATE;
+////            Date date = document.getDate("timeStamp", behavior);
+////            Contribution contribution = document.toObject(Contribution.class, behavior);
+////            Contribution contribution = document.toObject(Contribution.class);
+//            Map<String, Object> map = document.getData();;
+//            Contribution contribution = new Contribution(map);
+//            contributions.add(contribution);
+//
+//        }
+//        return temp;
 
-            Map<String, Object> map = document.getData();;
-            Contribution contribution = new Contribution(map);
-            contributions.add(contribution);
-
-        }
-        return temp;
 
 
-//        Task<QuerySnapshot> temp = collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        collectionReference.get()
+                .continueWithTask(new Continuation<QuerySnapshot, Task<List<QuerySnapshot>>>() {
+                    @Override
+                    public Task<List<QuerySnapshot>> then(@NonNull Task<QuerySnapshot> task) {
+                        List<Task<QuerySnapshot>> tasks = new ArrayList<Task<QuerySnapshot>>();
+                        for (DocumentSnapshot documentSnapshot : task.getResult()){
+                            tasks.add(documentSnapshot.getReference().collection("unrated").get());
+                        }
+                        return Tasks.whenAllSuccess(tasks);
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<List<QuerySnapshot>>() {
+            @Override
+            public void onComplete(@NonNull Task<List<QuerySnapshot>> task) {
+                List<QuerySnapshot> list = task.getResult();
+                for(QuerySnapshot querySnapshot : list) {
+                    for (DocumentSnapshot documentSnapshot : querySnapshot) {
+                        Contribution contribution = documentSnapshot.toObject(Contribution.class);
+                        contributions.add(contribution);
+                    }
+                }
+
+            }
+        });
+
+//        temp.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 //            @Override
-//            public void onSuccess(QuerySnapshot documentSnapshots) {
-//                if (!documentSnapshots.isEmpty()){
-//                    for (DocumentSnapshot document : documentSnapshots) {
-//                        Contribution contribution = document.toObject(Contribution.class);
+//            public void onComplete (@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()){
+//                    for (DocumentSnapshot document : task.getResult().getDocuments()) {
+//                        Map<String, Object> map = document.getData();;
+//                        Contribution contribution = new Contribution(map);
 //                        contributions.add(contribution);
 //                    }
+//                } else {
+//                    Log.d(TAG, "Error getting contributions: ", task.getException());
 //                }
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Log.d(TAG, "Failure due to: ", e);
 //            }
 //        });
 
@@ -184,8 +185,6 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
 //            }
 //        });
 
-       // return temp;
-
     }
 
     private void submitRating() {
@@ -196,9 +195,9 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnRetrieveContribution){
-            Task<QuerySnapshot> temp = getContributions();
-            System.out.println(temp);
+            getContributions();
             System.out.println(contributions);
+
         }
         else if (v.getId() == R.id.btnSubmitRating) {
             submitRating();
