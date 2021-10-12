@@ -54,6 +54,27 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/garbageAmount"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvGarbageAmountName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Garbage Amount:" />
+
+            <TextView
+                android:id="@+id/tvGarbageAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Placeholder" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/horizontal_layout3"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -93,7 +114,7 @@
             android:layout_height="10dp"/>
 
         <EditText
-            android:id="@+id/editTextTextMultiLine"
+            android:id="@+id/editTextMultiLineComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

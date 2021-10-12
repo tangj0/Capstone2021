@@ -15,8 +15,9 @@ public class Contribution {
     }
 
     private String id;
+    private String playerId; //need this when calculating referencing rated contribution back to player
     private GarbageType garbageType;
-//    private int garbageAmount;
+    private int garbageAmount;
     private String beforeImg;
     private String afterImg;
 
@@ -25,33 +26,36 @@ public class Contribution {
 
     private int maxRatings;
     private boolean finalRating;
-    private String[] ratingIDs;
+    private int numOfRatings;
 
     public Contribution() {
     }
 
-    public Contribution(String id, GarbageType garbageType, String beforeImg, String afterImg, int maxRatings, boolean finalRating, String[] ratingIDs) {
+    public Contribution(String id, String playerId, GarbageType garbageType, int garbageAmount, String beforeImg, String afterImg, int maxRatings, boolean finalRating, int numOfRatings) {
         this.id = id;
+        this.playerId = playerId;
         this.garbageType = garbageType;
+        this.garbageAmount = garbageAmount;
         this.beforeImg = beforeImg;
         this.afterImg = afterImg;
         this.maxRatings = maxRatings;
         this.finalRating = finalRating;
-        this.ratingIDs = ratingIDs;
+        this.numOfRatings = numOfRatings;
     }
 
     // documentSnapshot.toObject() doesn't work, doing this with custom class:
-    public Contribution(Map<String, Object> map){
-        this.id = map.get("id").toString();
-        this.garbageType = getGarbageTypeFromString((String)map.get("garbageType"));
-        this.beforeImg = map.get("beforeImg").toString();
-        this.afterImg = map.get("afterImg").toString();
-        this.maxRatings = Integer.parseInt(map.get("maxRatings").toString());
-        this.finalRating = (boolean) map.get("finalRating");
-        this.ratingIDs = (String[]) map.get("ratingIDs");
-        Timestamp tempTimeStamp = (Timestamp) map.get("date");
-        this.date = tempTimeStamp.toDate();
-    }
+    // actually documentSnapshot.toObject() works fine, just keeping this for reference
+//    public Contribution(Map<String, Object> map){
+//        this.id = map.get("id").toString();
+//        this.garbageType = getGarbageTypeFromString((String)map.get("garbageType"));
+//        this.beforeImg = map.get("beforeImg").toString();
+//        this.afterImg = map.get("afterImg").toString();
+//        this.maxRatings = Integer.parseInt(map.get("maxRatings").toString());
+//        this.finalRating = (boolean) map.get("finalRating");
+//        this.ratingIDs = (String[]) map.get("ratingIDs");
+//        Timestamp tempTimeStamp = (Timestamp) map.get("date");
+//        this.date = tempTimeStamp.toDate();
+//    }
 
     public String getId(){
         return id;
@@ -59,6 +63,14 @@ public class Contribution {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(String playerId) {
+        this.playerId = playerId;
     }
 
     public GarbageType getGarbageType() {
@@ -69,14 +81,13 @@ public class Contribution {
         this.garbageType = garbageType;
     }
 
-//    public int getGarbageAmount() {
-//        return garbageAmount;
-//    }
-//
-//    public void setGarbageAmount(int garbageAmount) {
-//        this.garbageAmount = garbageAmount;
-//    }
+    public int getGarbageAmount() {
+        return garbageAmount;
+    }
 
+    public void setGarbageAmount(int garbageAmount) {
+        this.garbageAmount = garbageAmount;
+    }
 
     public String getBeforeImg() {
         return beforeImg;
@@ -110,12 +121,12 @@ public class Contribution {
         this.finalRating = finalRating;
     }
 
-    public String[] getRatingIDs() {
-        return ratingIDs;
+    public int getNumOfRatings() {
+        return numOfRatings;
     }
 
-    public void setRatingIDs(String[] ratingIDs) {
-        this.ratingIDs = ratingIDs;
+    public void setNumOfRatings(int numOfRatings) {
+        this.numOfRatings = numOfRatings;
     }
 
     public Date getDate() {

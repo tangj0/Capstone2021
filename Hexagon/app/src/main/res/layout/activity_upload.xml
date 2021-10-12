@@ -56,7 +56,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_view_before_image"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="190dp" />
 
         <TextView
             android:id="@+id/text_view_after_image"
@@ -69,7 +69,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_view_after_image"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="190dp" />
 
         <LinearLayout
             android:id="@+id/select_garbage_type_layout"
@@ -91,6 +91,27 @@
                 android:background="@android:drawable/btn_dropdown"
                 android:spinnerMode="dropdown" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/garbageAmount"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvGarbageAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Garbage Amount:" />
+
+            <Spinner
+                android:id="@+id/garbageAmountOptions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown" />
         </LinearLayout>
 
         <Button

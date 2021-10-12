@@ -1,11 +1,15 @@
 package com.capstone.hexagon;
 
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +23,7 @@ import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -27,22 +32,28 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 public class RateActivity extends AppCompatActivity implements View.OnClickListener {
+    private Spinner rateOptions;
+    private final String[] approvalOptions = new String[]{"Approve", "Reject"};
     private Button retrieveContribution, submitRating;
+    private TextView tvGarbageType, tvGarbageAmount;
+    private EditText etComment;
 
     private FirebaseAuth auth;
     private StorageReference storageReference;
     private FirebaseFirestore fStore;
 
     private Uri uri;
-    private String playerID;
+    private String playerId;
 
-    private Contribution contribution;
+    private Contribution contToRate;
     private Rating rating;
     private List<Contribution> contributions;
+    private List<Contribution> contsToRemove;
+    private List<Boolean> equalsCurr;
 
     String TAG = RateActivity.class.getSimpleName();
 
@@ -56,9 +67,8 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
         Adapter adapter = new Adapter(this);
         viewPager.setAdapter(adapter);
 
-        Spinner rateOptions = findViewById(R.id.spinnerRateOptions);
-        String[] options = new String[]{"Approve", "Reject"};
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, options);
+        rateOptions = findViewById(R.id.spinnerRateOptions);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, approvalOptions);
         rateOptions.setAdapter(arrayAdapter);
 
         retrieveContribution = (Button) findViewById(R.id.btnRetrieveContribution);
@@ -66,66 +76,25 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
         submitRating = (Button) findViewById(R.id.btnSubmitRating);
         submitRating.setOnClickListener(this);
 
+        tvGarbageType = (TextView) findViewById(R.id.tvGarbageType);
+        tvGarbageAmount = (TextView) findViewById(R.id.tvGarbageAmount);
+
+        etComment = (EditText) findViewById(R.id.editTextMultiLineComment);
+
         auth = FirebaseAuth.getInstance();
         FirebaseUser player = auth.getCurrentUser();
-        playerID = player.getUid();
+        playerId = player.getUid();
 
         storageReference = FirebaseStorage.getInstance().getReference();
         fStore = FirebaseFirestore.getInstance();
 
-        contribution = new Contribution();
         contributions = new ArrayList<>();
+        contsToRemove = new ArrayList<>();
         rating = new Rating();
-    }
 
-    //TODO
-    //Retrieve from Firestore, get from the "unrated" collection
-    //then "move" the document to the "rated" section
-    // then change it
-    // TODO
-    // right now getting a random doc, change to ordering by timestamp
-    private void getContribution() {
-        //https://stackoverflow.com/questions/47244403/how-to-move-a-document-in-cloud-firestore
-        //TODO: change Adapter to take images from Firebase
-    }
-
-
-    private void getContributions(){
-//        CollectionReference collectionReference = fStore.collection("contributions").document(playerID).collection("unrated");
         CollectionReference collectionReference = fStore.collection("contributions");
 
-
-//        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
-//            @Override
-//            public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException error) {
-//                if (documentSnapshots != null && !documentSnapshots.getDocuments().isEmpty()){
-//                    contributions = new ArrayList<>();
-//                    List<DocumentSnapshot> documents = documentSnapshots.getDocuments();
-//                    for (DocumentSnapshot value : documents) {
-//                        Contribution contribution = value.toObject(Contribution.class);
-//                        contributions.add(contribution);
-//                    }
-//                }
-//            }
-//        });
-
-
-//        Task<QuerySnapshot> temp = collectionReference.get();
-//        List<DocumentSnapshot> documents = temp.getResult().getDocuments();
-//        for (DocumentSnapshot document : documents) {
-////            DocumentSnapshot.ServerTimestampBehavior behavior = DocumentSnapshot.ServerTimestampBehavior.ESTIMATE;
-////            Date date = document.getDate("timeStamp", behavior);
-////            Contribution contribution = document.toObject(Contribution.class, behavior);
-////            Contribution contribution = document.toObject(Contribution.class);
-//            Map<String, Object> map = document.getData();;
-//            Contribution contribution = new Contribution(map);
-//            contributions.add(contribution);
-//
-//        }
-//        return temp;
-
-
-
+        // get all contributions from the "unrated" pile, from all players
         collectionReference.get()
                 .continueWithTask(new Continuation<QuerySnapshot, Task<List<QuerySnapshot>>>() {
                     @Override
@@ -143,51 +112,96 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
                 for(QuerySnapshot querySnapshot : list) {
                     for (DocumentSnapshot documentSnapshot : querySnapshot) {
                         Contribution contribution = documentSnapshot.toObject(Contribution.class);
+                        // add everything to list for now, filter out current player later
+                        // otherwise null pointer exception, need to finish getting contribution first
                         contributions.add(contribution);
                     }
                 }
 
             }
         });
+    }
 
-//        temp.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete (@NonNull Task<QuerySnapshot> task) {
-//                if (task.isSuccessful()){
-//                    for (DocumentSnapshot document : task.getResult().getDocuments()) {
-//                        Map<String, Object> map = document.getData();;
-//                        Contribution contribution = new Contribution(map);
-//                        contributions.add(contribution);
-//                    }
-//                } else {
-//                    Log.d(TAG, "Error getting contributions: ", task.getException());
-//                }
-//            }
-//        });
+    private void getContribution(){
+        // remove all contributions by current player and contributions to-be-rated from contributions list
+        if (contributions != null) {
+            for (Contribution contribution : contributions) {
+                if (!contribution.getPlayerId().contentEquals(playerId)) {
+                    contToRate = contribution;
+                    contsToRemove.add(contribution);
+                    break;
+                } else {
+                    contsToRemove.add(contribution);
+                }
+            }
+            contributions.removeAll(contsToRemove);
+        }
 
+        // set rating page contribution to contToRate
+        if (contToRate != null) {
+            tvGarbageType.setText(contToRate.getGarbageType().toString());
+            tvGarbageAmount.setText(String.valueOf(contToRate.getGarbageAmount()));
 
-//        Task<QuerySnapshot> temp = collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//            @Override
-//            public void onSuccess(QuerySnapshot documentSnapshots) {
-////                if (!documentSnapshots.isEmpty()){
-////                    for (DocumentSnapshot document : documentSnapshots) {
-////                        Contribution contribution = document.toObject(Contribution.class);
-////                        contributions.add(contribution);
-////                    }
-////                }
-//                System.out.println("SUCCESS!");
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Log.d(TAG, "Failure due to: ", e);
-//                System.out.println("Failure reason: "+ e);
-//            }
-//        });
+            // TODO: set contToRate images
+            // TODO: in future, sort contributions by date (first come first serve)
+        }
 
     }
 
     private void submitRating() {
+        // set current rating
+        UUID ratingId = UUID.randomUUID();
+        String strRatingId = ratingId.toString();
+        if (contToRate != null) {
+            rating.setId(strRatingId);
+
+            rating.setRaterId(playerId);
+
+            if (rateOptions.getSelectedItem().toString().contentEquals(approvalOptions[0])) {
+                rating.setApproval(true);
+            }
+            else if (rateOptions.getSelectedItem().toString().contentEquals(approvalOptions[1])) {
+                rating.setApproval(false);
+            }
+            rating.setComment(etComment.getText().toString());
+        }
+
+        // submit current rating
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Uploading");
+        pd.show();
+
+        DocumentReference ratingDocumentReference = fStore.collection("contributions")
+                .document(contToRate.getPlayerId())
+                .collection("unrated")
+                .document(contToRate.getId())
+                .collection("ratings")
+                .document(strRatingId);
+        ratingDocumentReference.set(rating).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(RateActivity.this, "Rating uploaded successfully!", Toast.LENGTH_LONG).show();
+                    pd.dismiss();
+                }
+                else {
+                    Toast.makeText(RateActivity.this, "Rating upload was unsuccessful", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        //Increment corresponding contribution rating count
+        fStore.collection("contributions")
+                .document(contToRate.getPlayerId())
+                .collection("unrated")
+                .document(contToRate.getId()).update("numOfRatings", contToRate.getNumOfRatings() + 1);
+
+        //TODO
+        // automatically get the next contribution (don't want same user rating same cont twice)
+
+        //TODO
+        // check if rating count == 20
+        // if true, automatically move this contribution to "rated" pile in database
 
     }
 
@@ -195,12 +209,18 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnRetrieveContribution){
-            getContributions();
             System.out.println(contributions);
-
+            getContribution();
+            System.out.println(contsToRemove);
+            System.out.println("To RATE: " + contToRate);
         }
         else if (v.getId() == R.id.btnSubmitRating) {
             submitRating();
+            System.out.println("RATING: " + rating);
+            System.out.println(rating.getComment().toString());
+            System.out.println(rating.getId());
+            System.out.println(rating.getRaterId());
+            System.out.println(rating.isApproval());
         }
     }
 }

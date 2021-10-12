@@ -14,7 +14,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
@@ -49,13 +48,13 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
     private static final int IMAGE_REQUEST = 3;
     private String imageOrder = "";
     private Uri uri;
-    private String playerID;
+    private String playerId;
     private FirebaseUser player;
     private FirebaseAuth auth;
     private FirebaseFirestore fStore;
     private StorageReference storageReference;
     private Contribution contribution;
-    private Spinner garbageTypeOptions;
+    private Spinner garbageTypeOptions, garbageAmountOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +79,18 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, options);
         garbageTypeOptions.setAdapter(arrayAdapter);
 
+        garbageAmountOptions = findViewById(R.id.garbageAmountOptions);
+        String[] amounts = new String[]{"1", "2", "3", "4", "5"};
+        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, amounts);
+        garbageAmountOptions.setAdapter(arrayAdapter2);
+
         auth = FirebaseAuth.getInstance();
         player = auth.getCurrentUser();
-        playerID = player.getUid();
+        playerId = player.getUid();
         storageReference = FirebaseStorage.getInstance().getReference();
         fStore = FirebaseFirestore.getInstance();
         contribution = new Contribution();
+        contribution.setPlayerId(playerId);
     }
 
 //    private void openCamera(int requestCode) {
@@ -140,7 +145,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         if (uri != null) {
             UUID imageUUID = UUID.randomUUID();
             String strUUID = imageUUID.toString();
-            StorageReference imageStorageRef = storageReference.child("players/" + playerID + "/images/" + imageOrder + "/" + strUUID + "." + getFileExtension(uri));
+            StorageReference imageStorageRef = storageReference.child("players/" + playerId + "/images/" + imageOrder + "/" + strUUID + "." + getFileExtension(uri));
             imageStorageRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -179,26 +184,25 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
 
     private void submitContribution(){ //Upload to Firestore
         contribution.setGarbageType(contribution.getGarbageTypeFromString(garbageTypeOptions.getSelectedItem().toString())); //string to enum
+        contribution.setGarbageAmount(Integer.parseInt(garbageAmountOptions.getSelectedItem().toString()));
         contribution.setMaxRatings(20);
+        contribution.setNumOfRatings(0);
         contribution.setFinalRating(false);
 
-//        FieldValue timeStamp = FieldValue.serverTimestamp();
-//        contribution.setTimeStamp(timeStamp);
-
-        UUID contributionID = UUID.randomUUID();
-        String strContUUID = contributionID.toString();
+        UUID contributionId = UUID.randomUUID();
+        String strContUUID = contributionId.toString();
         contribution.setId(strContUUID);
 
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Uploading");
         pd.show();
 
-        DocumentReference documentReference = fStore.collection("contributions").document(playerID).collection("unrated").document(strContUUID);
+        DocumentReference documentReference = fStore.collection("contributions").document(playerId).collection("unrated").document(strContUUID);
 
         // Do this so document is not empty, otherwise won't appear in queries or snapshots
         Map<String, String> dummyField = new HashMap<>();
         dummyField.put("Name", player.getEmail());
-        fStore.collection("contributions").document(playerID).set(dummyField, SetOptions.merge());
+        fStore.collection("contributions").document(playerId).set(dummyField, SetOptions.merge());
 
         documentReference.set(contribution).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
