@@ -1,63 +1,61 @@
 package com.capstone.hexagon;
 
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ServerValue;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class RateActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private Button btnUploadBefore;
-    private Button btnUploadAfter;
-    private Button btnUploadContribution;
-    private Button btnGetContribution;
+    private Spinner rateOptions;
+    private final String[] approvalOptions = new String[]{"Approve", "Reject"};
+    private Button retrieveContribution, submitRating;
+    private TextView tvGarbageType, tvGarbageAmount;
+    private EditText etComment;
 
     private FirebaseAuth auth;
     private StorageReference storageReference;
     private FirebaseFirestore fStore;
 
     private Uri uri;
-    private String playerID;
+    private String playerId;
 
-    private static final int IMAGE_REQUEST = 2;
+    private Contribution contToRate;
+    private Rating rating;
+    private List<Contribution> contributions;
+    private List<Contribution> contsToRemove;
+    private List<Boolean> equalsCurr;
 
-    private String imageOrder = "";
-
-    private Contribution contribution; //dummy Contribution to test Rating, TODO: remove later
+    String TAG = RateActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,147 +67,160 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
         Adapter adapter = new Adapter(this);
         viewPager.setAdapter(adapter);
 
-        Spinner rateOptions = findViewById(R.id.spinnerRateOptions);
-        String[] options = new String[]{"Approve", "Reject"};
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, options);
+        rateOptions = findViewById(R.id.spinnerRateOptions);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, approvalOptions);
         rateOptions.setAdapter(arrayAdapter);
 
-        btnUploadBefore = (Button) findViewById(R.id.btnBeforeImg);
-        btnUploadBefore.setOnClickListener(this);
-        btnUploadAfter = (Button) findViewById(R.id.btnAfterImg);
-        btnUploadAfter.setOnClickListener(this);
-        btnUploadContribution = (Button) findViewById(R.id.btnUploadContribution);
-        btnUploadContribution.setOnClickListener(this);
-        btnGetContribution = (Button) findViewById(R.id.btnRetrieveContribution);
-        btnGetContribution.setOnClickListener(this);
+        retrieveContribution = (Button) findViewById(R.id.btnRetrieveContribution);
+        retrieveContribution.setOnClickListener(this);
+        submitRating = (Button) findViewById(R.id.btnSubmitRating);
+        submitRating.setOnClickListener(this);
+
+        tvGarbageType = (TextView) findViewById(R.id.tvGarbageType);
+        tvGarbageAmount = (TextView) findViewById(R.id.tvGarbageAmount);
+
+        etComment = (EditText) findViewById(R.id.editTextMultiLineComment);
 
         auth = FirebaseAuth.getInstance();
         FirebaseUser player = auth.getCurrentUser();
-        playerID = player.getUid();
+        playerId = player.getUid();
 
         storageReference = FirebaseStorage.getInstance().getReference();
+        fStore = FirebaseFirestore.getInstance();
 
-        contribution = new Contribution();
-    }
+        contributions = new ArrayList<>();
+        contsToRemove = new ArrayList<>();
+        rating = new Rating();
 
-    private void uploadDummyContribution(){ //Upload to Firestore
-        contribution.setGarbageType(Contribution.GarbageType.MASK);
-//        contribution.setGarbageAmount(1);
-        contribution.setFinalRating(false);
+        CollectionReference collectionReference = fStore.collection("contributions");
 
-        FieldValue timeStamp = FieldValue.serverTimestamp();
-        contribution.setTimeStamp(timeStamp);
-
-        UUID contributionID = UUID.randomUUID();
-        String strContUUID = contributionID.toString();
-
-        final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Uploading");
-        pd.show();
-
-        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("contributions").document(playerID).collection("unrated").document(strContUUID);
-        documentReference.set(contribution).addOnCompleteListener(new OnCompleteListener<Void>() {
+        // get all contributions from the "unrated" pile, from all players
+        collectionReference.get()
+                .continueWithTask(new Continuation<QuerySnapshot, Task<List<QuerySnapshot>>>() {
+                    @Override
+                    public Task<List<QuerySnapshot>> then(@NonNull Task<QuerySnapshot> task) {
+                        List<Task<QuerySnapshot>> tasks = new ArrayList<Task<QuerySnapshot>>();
+                        for (DocumentSnapshot documentSnapshot : task.getResult()){
+                            tasks.add(documentSnapshot.getReference().collection("unrated").get());
+                        }
+                        return Tasks.whenAllSuccess(tasks);
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<List<QuerySnapshot>>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(RateActivity.this, "Contribution uploaded successfully!", Toast.LENGTH_LONG).show();
-                    pd.dismiss();
+            public void onComplete(@NonNull Task<List<QuerySnapshot>> task) {
+                List<QuerySnapshot> list = task.getResult();
+                for(QuerySnapshot querySnapshot : list) {
+                    for (DocumentSnapshot documentSnapshot : querySnapshot) {
+                        Contribution contribution = documentSnapshot.toObject(Contribution.class);
+                        // add everything to list for now, filter out current player later
+                        // otherwise null pointer exception, need to finish getting contribution first
+                        contributions.add(contribution);
+                    }
                 }
-                else {
-                    Toast.makeText(RateActivity.this, "Contribution upload was unsuccessful", Toast.LENGTH_LONG).show();
-                }
+
             }
         });
     }
 
-    //TODO
-    //Retrieve from Firestore, get from the "unrated" collection
-    //then "move" the document to the "rated" section
-    private void getDummyContribution() {
-        //https://stackoverflow.com/questions/47244403/how-to-move-a-document-in-cloud-firestore
-        //TODO: change Adapter to take images from Firebase
-    }
-
-    private void openImage() {
-        Intent intent = new Intent();
-        intent.setType("image/*"); //adding * made it work
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, IMAGE_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK){
-            uri = data.getData();
-            uploadImage();
+    private void getContribution(){
+        // remove all contributions by current player and contributions to-be-rated from contributions list
+        if (contributions != null) {
+            for (Contribution contribution : contributions) {
+                if (!contribution.getPlayerId().contentEquals(playerId)) {
+                    contToRate = contribution;
+                    contsToRemove.add(contribution);
+                    break;
+                } else {
+                    contsToRemove.add(contribution);
+                }
+            }
+            contributions.removeAll(contsToRemove);
         }
+
+        // set rating page contribution to contToRate
+        if (contToRate != null) {
+            tvGarbageType.setText(contToRate.getGarbageType().toString());
+            tvGarbageAmount.setText(String.valueOf(contToRate.getGarbageAmount()));
+
+            // TODO: set contToRate images
+            // TODO: in future, sort contributions by date (first come first serve)
+        }
+
     }
 
-    private String getFileExtension(Uri uri){
-        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
-    }
+    private void submitRating() {
+        // set current rating
+        UUID ratingId = UUID.randomUUID();
+        String strRatingId = ratingId.toString();
+        if (contToRate != null) {
+            rating.setId(strRatingId);
 
-    private void uploadImage() { //Upload actual image file to Storage (cloud storage)
+            rating.setRaterId(playerId);
+
+            if (rateOptions.getSelectedItem().toString().contentEquals(approvalOptions[0])) {
+                rating.setApproval(true);
+            }
+            else if (rateOptions.getSelectedItem().toString().contentEquals(approvalOptions[1])) {
+                rating.setApproval(false);
+            }
+            rating.setComment(etComment.getText().toString());
+        }
+
+        // submit current rating
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Uploading");
         pd.show();
 
-        if (uri != null) {
-            UUID imageUUID = UUID.randomUUID();
-            String strUUID = imageUUID.toString();
-            StorageReference imageStorageRef = storageReference.child("players/" + playerID + "/images/" + imageOrder + "/" + strUUID + "." + getFileExtension(uri));
-            imageStorageRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+        DocumentReference ratingDocumentReference = fStore.collection("contributions")
+                .document(contToRate.getPlayerId())
+                .collection("unrated")
+                .document(contToRate.getId())
+                .collection("ratings")
+                .document(strRatingId);
+        ratingDocumentReference.set(rating).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(RateActivity.this, "Rating uploaded successfully!", Toast.LENGTH_LONG).show();
                     pd.dismiss();
-                    Toast.makeText(RateActivity.this, "Uploaded image successfully!", Toast.LENGTH_LONG).show();
-
-                    imageStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            String downloadUri = uri.toString();
-                            Log.d("DownloadUri: ", downloadUri);
-
-                            // add image link to Storage to Contribution object
-                            if (imageOrder.equals("before")){
-                                contribution.setBeforeImg(downloadUri);
-                            }
-                            else if (imageOrder.equals("after")){
-                                contribution.setAfterImg(downloadUri);
-                            }
-
-                        }
-                    });
                 }
-
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(RateActivity.this, "Uploaded image unsuccessful.", Toast.LENGTH_LONG).show();
+                else {
+                    Toast.makeText(RateActivity.this, "Rating upload was unsuccessful", Toast.LENGTH_LONG).show();
                 }
-            });
-        }
-        else {
-            Toast.makeText(RateActivity.this, "UIR null", Toast.LENGTH_LONG).show();
-        }
+            }
+        });
+
+        //Increment corresponding contribution rating count
+        fStore.collection("contributions")
+                .document(contToRate.getPlayerId())
+                .collection("unrated")
+                .document(contToRate.getId()).update("numOfRatings", contToRate.getNumOfRatings() + 1);
+
+        //TODO
+        // automatically get the next contribution (don't want same user rating same cont twice)
+
+        //TODO
+        // check if rating count == 20
+        // if true, automatically move this contribution to "rated" pile in database
+
     }
+
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btnBeforeImg){
-            imageOrder = "before";
-            openImage();
+        if (v.getId() == R.id.btnRetrieveContribution){
+            System.out.println(contributions);
+            getContribution();
+            System.out.println(contsToRemove);
+            System.out.println("To RATE: " + contToRate);
         }
-        else if (v.getId() == R.id.btnAfterImg){
-            imageOrder = "after";
-            openImage();
-        }
-        else if (v.getId() == R.id.btnUploadContribution){
-            uploadDummyContribution();
+        else if (v.getId() == R.id.btnSubmitRating) {
+            submitRating();
+            System.out.println("RATING: " + rating);
+            System.out.println(rating.getComment().toString());
+            System.out.println(rating.getId());
+            System.out.println(rating.getRaterId());
+            System.out.println(rating.isApproval());
         }
     }
 }

@@ -1,23 +1,37 @@
 package com.capstone.hexagon;
 
 public class Rating {
+
+    private String id;
+    private String raterId;
     private boolean approval;
     private String comment;
-    private int likes;
+    //    private int likes;
 
-    public Rating(boolean approval, String comment, int likes) {
+    public Rating(String id, String raterId, boolean approval, String comment) {
+        this.id = id;
+        this.raterId = raterId;
         this.approval = approval;
         this.comment = comment;
-        this.likes = likes;
-    }
-
-    public Rating(boolean approval, String comment) {
-        this.approval = approval;
-        this.comment = comment;
-        this.likes = 0;
     }
 
     public Rating() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getRaterId() {
+        return raterId;
+    }
+
+    public void setRaterId(String raterId) {
+        this.raterId = raterId;
     }
 
     public boolean isApproval() {
@@ -36,11 +50,11 @@ public class Rating {
         this.comment = comment;
     }
 
-    public int getLikes() {
-        return likes;
-    }
-
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
+//    public int getLikes() {
+//        return likes;
+//    }
+//
+//    public void setLikes(int likes) {
+//        this.likes = likes;
+//    }
 }
