@@ -15,6 +15,8 @@ public class TouchDetection : MonoBehaviour
     public TileBase groundTile;
     public TileBase grassTile;
     private bool[,] tiles;
+    private List<int[]> allTilemapCoordinates;
+    private List<int[]> grassTilemapCoordinates;
     private int MIN_GRID_X = -5; // Tilemap coordinates
     private int MAX_GRID_X = 5;
     private int MIN_GRID_Y = -5;
@@ -53,6 +55,53 @@ public class TouchDetection : MonoBehaviour
     void Start()
     {
         tiles = new bool[MAX_GRID_X - MIN_GRID_X + 1, MAX_GRID_Y - MIN_GRID_Y + 1];
+
+        // Fill in tilemapCoordinates
+        allTilemapCoordinates = new List<int[]>();
+        for (int x = MIN_GRID_X + 1; x <= MAX_GRID_X; x++)
+        {
+            for (int y = MIN_GRID_Y + 2; y <= MAX_GRID_Y; y++)
+            {
+                if (x == MIN_GRID_X + 1 && (y >= 2 || y <= 5))
+                {
+                    continue;
+                }
+                allTilemapCoordinates.Add(new int[] { x, y });
+            }
+        }
+        allTilemapCoordinates.RemoveAll(c => c[0] == -3 && c[1] == 4);
+        allTilemapCoordinates.RemoveAll(c => c[0] == -3 && c[1] == 5);
+        allTilemapCoordinates.RemoveAll(c => c[0] == -2 && c[1] == 5);
+        allTilemapCoordinates.RemoveAll(c => c[0] == 5 && c[1] == -3);
+        grassTilemapCoordinates = new List<int[]>(allTilemapCoordinates);
+        grassTilemapCoordinates.Add(new int[] { -4 , -4});
+        grassTilemapCoordinates.Add(new int[] { -3, -4 });
+        grassTilemapCoordinates.Add(new int[] { -2, -4 });
+        grassTilemapCoordinates.Add(new int[] { -1, -4 });
+        grassTilemapCoordinates.Add(new int[] { 0, -4 });
+        grassTilemapCoordinates.Add(new int[] { 1, -4 });
+        grassTilemapCoordinates.Add(new int[] { 2, -4 });
+        grassTilemapCoordinates.Add(new int[] { -4, 2 });
+        grassTilemapCoordinates.Add(new int[] { -4, 1 });
+        grassTilemapCoordinates.Add(new int[] { -4, 0 });
+        grassTilemapCoordinates.Add(new int[] { -4, -1 });
+        grassTilemapCoordinates.Add(new int[] { -4, -2 });
+        grassTilemapCoordinates.Add(new int[] { -4, -3 });
+        grassTilemapCoordinates.Add(new int[] { -5, 1 });
+        grassTilemapCoordinates.Add(new int[] { -5, 0 });
+        grassTilemapCoordinates.Add(new int[] { -5, -1 });
+        grassTilemapCoordinates.Add(new int[] { -5, -2 });
+        grassTilemapCoordinates.Add(new int[] { -5, -3 });
+        grassTilemapCoordinates.Add(new int[] { -5, -4 });
+        grassTilemapCoordinates.Add(new int[] { -5, -5 });
+        grassTilemapCoordinates.Add(new int[] { -4, -5 });
+        grassTilemapCoordinates.Add(new int[] { -3, -5 });
+        grassTilemapCoordinates.Add(new int[] { -2, -5 });
+        grassTilemapCoordinates.Add(new int[] { -1, -5 });
+        grassTilemapCoordinates.Add(new int[] { 0, -5 });
+        grassTilemapCoordinates.Add(new int[] { 1, -5 });
+        grassTilemapCoordinates.RemoveAll(c => c[0] == 4 && c[1] == -3);
+        grassTilemapCoordinates.RemoveAll(c => c[0] == 5 && c[1] == -2);
     }
 
     // Update is called once per frame
@@ -79,7 +128,17 @@ public class TouchDetection : MonoBehaviour
                     break;
                 case ItemTouched.tile:
                     if (grassTouched) {
-                        tilemap.SetTile(cellPos, grassTile);
+                        for (int dx = -2; dx <= 2; dx++)
+                        {
+                            for (int dy = -2; dy <= 2; dy++)
+                            {
+                                Vector3Int setCellPos = new Vector3Int(cellPos.x + dx, cellPos.y + dy, 0);
+                                if (grassTilemapCoordinates.Exists(c => c[0] == setCellPos.x && c[1] == setCellPos.y))
+                                {
+                                    tilemap.SetTile(setCellPos, grassTile);
+                                }
+                            }
+                        }
                         grassTouched = false;
                     }
                     else if (plantTouched)
@@ -176,6 +235,6 @@ public class TouchDetection : MonoBehaviour
         Vector3 worldPos = new Vector3(x, y, 0);
         Vector3 gridPos = grid.WorldToCell(worldPos);
 
-        return gridPos.x >= MIN_GRID_X && gridPos.x <= MAX_GRID_X && gridPos.y >= MIN_GRID_Y && gridPos.y <= MAX_GRID_Y;
+        return allTilemapCoordinates.Exists(c => c[0] == (int) gridPos.x && c[1] == (int) gridPos.y);
     }
 }
