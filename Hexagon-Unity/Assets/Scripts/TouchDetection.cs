@@ -128,14 +128,17 @@ public class TouchDetection : MonoBehaviour
                     break;
                 case ItemTouched.tile:
                     if (grassTouched) {
-                        for (int dx = -2; dx <= 2; dx++)
+                        if (Inventory.SpendGrass())
                         {
-                            for (int dy = -2; dy <= 2; dy++)
+                            for (int dx = -2; dx <= 2; dx++)
                             {
-                                Vector3Int setCellPos = new Vector3Int(cellPos.x + dx, cellPos.y + dy, 0);
-                                if (grassTilemapCoordinates.Exists(c => c[0] == setCellPos.x && c[1] == setCellPos.y))
+                                for (int dy = -2; dy <= 2; dy++)
                                 {
-                                    tilemap.SetTile(setCellPos, grassTile);
+                                    Vector3Int setCellPos = new Vector3Int(cellPos.x + dx, cellPos.y + dy, 0);
+                                    if (grassTilemapCoordinates.Exists(c => c[0] == setCellPos.x && c[1] == setCellPos.y))
+                                    {
+                                        tilemap.SetTile(setCellPos, grassTile);
+                                    }
                                 }
                             }
                         }
@@ -143,14 +146,20 @@ public class TouchDetection : MonoBehaviour
                     }
                     else if (plantTouched)
                     {
-                        GameObject obj = Instantiate(plant, grid.CellToWorld(cellPos), Quaternion.identity);
-                        obj.transform.SetParent(canvas);
+                        if (Inventory.SpendPlant())
+                        {
+                            GameObject obj = Instantiate(plant, grid.CellToWorld(cellPos), Quaternion.identity);
+                            obj.transform.SetParent(canvas);
+                        }
                         plantTouched = false;
                     }
                     else if (treeTouched)
                     {
-                        GameObject obj = Instantiate(tree, grid.CellToWorld(cellPos), Quaternion.identity);
-                        obj.transform.SetParent(canvas);
+                        if (Inventory.SpendTree())
+                        {
+                            GameObject obj = Instantiate(tree, grid.CellToWorld(cellPos), Quaternion.identity);
+                            obj.transform.SetParent(canvas);
+                        }
                         treeTouched = false;
                     }
                     break;

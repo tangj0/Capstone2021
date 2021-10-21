@@ -18,9 +18,9 @@ public class Icons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetWaterBalance(1);
-        SetOxygenBalance(2);
-        SetEnergyBalance(3);
+        SetWaterBalance(40);
+        SetOxygenBalance(40);
+        SetEnergyBalance(30);
     }
 
     // Update is called once per frame
