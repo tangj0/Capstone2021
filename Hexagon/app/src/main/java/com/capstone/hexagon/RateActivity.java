@@ -1,12 +1,19 @@
 package com.capstone.hexagon;
 
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,11 +38,19 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class RateActivity extends AppCompatActivity implements View.OnClickListener {
+    private ViewPager viewPager;
+    private Adapter adapter;
+
     private Spinner rateOptions;
     private final String[] approvalOptions = new String[]{"Approve", "Reject"};
     private Button retrieveContribution, submitRating;
@@ -64,10 +79,8 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate);
 
-        ViewPager viewPager = findViewById(R.id.view_pager);
-
-        Adapter adapter = new Adapter(this);
-        viewPager.setAdapter(adapter);
+        viewPager = findViewById(R.id.view_pager);
+        adapter = new Adapter(this);
 
         rateOptions = findViewById(R.id.spinnerRateOptions);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, approvalOptions);
@@ -135,7 +148,16 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private void getContribution(){
+//    private static Drawable drawableFromUrl(String url) throws IOException {
+//        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+//        connection.connect();
+//        InputStream input = connection.getInputStream();
+//
+//        Bitmap bitmap = BitmapFactory.decodeStream(input);
+//        return new ;
+//    }
+
+    private void getContribution() throws IOException {
         // remove all contributions by current player and contributions to-be-rated from contributions list
         if (contributions != null) {
             for (Contribution contribution : contributions) {
@@ -156,11 +178,35 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
             tvGarbageAmount.setText(String.valueOf(contToRate.getGarbageAmount()));
 
             // TODO: set contToRate images
+
+//            URL beforeUrl = new URL(contToRate.getBeforeImg());
+//            URL afterUrl = new URL(contToRate.getAfterImg());
+//            InputStream beforeStream = (InputStream) beforeUrl.getContent();
+//            InputStream afterStream = (InputStream) afterUrl.getContent();
+//            Drawable beforeDrawable = Drawable.createFromStream(beforeStream, null);
+//            Drawable afterDrawable = Drawable.createFromStream(afterStream, null);
+
+//            ImageView tempIV = findViewById(R.id.temp_image_view);
+//            ImageLoadAsyncTask imageLoadAsyncTask = new ImageLoadAsyncTask(contToRate.getBeforeImg(), tempIV);
+//            imageLoadAsyncTask.execute();
+
+            String[] urls = {contToRate.getBeforeImg(), contToRate.getAfterImg()};
+            ImageLoadAsyncTask imageLoadAsyncTask = new ImageLoadAsyncTask(urls, adapter, viewPager);
+            imageLoadAsyncTask.execute();
+
+
+//            Adapter adapter = new Adapter(this);
+//            Drawable[] imageArray = new Drawable[] {beforeDrawable, afterDrawable};
+//            adapter.setImageArray(imageArray);
+//            viewPager.setAdapter(adapter);
+
             // TODO: in future, sort contributions by date (first come first serve)
             // TODO: prevent players from getting a new contribution without submitting the first rating
         }
 
     }
+
+
 
     private void submitRating() {
         // set current rating
@@ -301,7 +347,11 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v.getId() == R.id.btnRetrieveContribution){
 //            System.out.println(contributions);
-            getContribution();
+            try {
+                getContribution();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 //            System.out.println(contsToRemove);
 //            System.out.println("To RATE: " + contToRate);
         }

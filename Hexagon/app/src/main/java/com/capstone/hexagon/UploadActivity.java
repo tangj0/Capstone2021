@@ -93,10 +93,10 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         contribution.setPlayerId(playerId);
     }
 
-//    private void openCamera(int requestCode) {
-//        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-//        startActivityForResult(intent, requestCode);
-//    }
+    private void openCamera(int requestCode) {
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        startActivityForResult(intent, requestCode);
+    }
 
 
 //    @Override
@@ -110,7 +110,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
 //            openCamera(AFTER_IMAGE_REQUEST_CODE);
 //        }
 //    }
-
+//
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);

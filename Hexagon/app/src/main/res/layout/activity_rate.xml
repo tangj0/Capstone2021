@@ -31,6 +31,10 @@
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="220dp" />
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:id="@+id/temp_image_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="190dp" />-->
 
         <LinearLayout
             android:id="@+id/horizontal_layout1"
