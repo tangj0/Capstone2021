@@ -9,6 +9,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import com.google.android.gms.tasks.Tasks;
@@ -45,6 +47,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 public class RateActivity extends AppCompatActivity implements View.OnClickListener {
@@ -148,15 +152,6 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-//    private static Drawable drawableFromUrl(String url) throws IOException {
-//        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-//        connection.connect();
-//        InputStream input = connection.getInputStream();
-//
-//        Bitmap bitmap = BitmapFactory.decodeStream(input);
-//        return new ;
-//    }
-
     private void getContribution() throws IOException {
         // remove all contributions by current player and contributions to-be-rated from contributions list
         if (contributions != null) {
@@ -177,28 +172,10 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
             tvGarbageType.setText(contToRate.getGarbageType().toString());
             tvGarbageAmount.setText(String.valueOf(contToRate.getGarbageAmount()));
 
-            // TODO: set contToRate images
-
-//            URL beforeUrl = new URL(contToRate.getBeforeImg());
-//            URL afterUrl = new URL(contToRate.getAfterImg());
-//            InputStream beforeStream = (InputStream) beforeUrl.getContent();
-//            InputStream afterStream = (InputStream) afterUrl.getContent();
-//            Drawable beforeDrawable = Drawable.createFromStream(beforeStream, null);
-//            Drawable afterDrawable = Drawable.createFromStream(afterStream, null);
-
-//            ImageView tempIV = findViewById(R.id.temp_image_view);
-//            ImageLoadAsyncTask imageLoadAsyncTask = new ImageLoadAsyncTask(contToRate.getBeforeImg(), tempIV);
-//            imageLoadAsyncTask.execute();
-
+            // set rating viewPager images
             String[] urls = {contToRate.getBeforeImg(), contToRate.getAfterImg()};
             ImageLoadAsyncTask imageLoadAsyncTask = new ImageLoadAsyncTask(urls, adapter, viewPager);
             imageLoadAsyncTask.execute();
-
-
-//            Adapter adapter = new Adapter(this);
-//            Drawable[] imageArray = new Drawable[] {beforeDrawable, afterDrawable};
-//            adapter.setImageArray(imageArray);
-//            viewPager.setAdapter(adapter);
 
             // TODO: in future, sort contributions by date (first come first serve)
             // TODO: prevent players from getting a new contribution without submitting the first rating
@@ -260,12 +237,18 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
             // automatically clear contToRate UI (don't want same user rating same cont twice)
             tvGarbageType.setText("");
             tvGarbageAmount.setText("");
-            // TODO: clear contToRate images
+            etComment.getText().clear();
+
+            // clear contToRate images
+            Bitmap[] clear = new Bitmap[2];
+            clear[0] = null;
+            clear[1] = null;
+            adapter.setImageArray(clear);
+            viewPager.setAdapter(adapter);
 
             // if a contribution has enough ratings, compute finalRating and move it to the "rated" pile
             if (numOfRatings >= MAX_NUM_OF_RATINGS) { //should never be > though
                 calcFinalRating();
-                //moveContribution();
             }
         }
 
@@ -273,23 +256,22 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
 
     // get all ratings from the current contribution
     private void calcFinalRating() {
-        CollectionReference collectionReference = fStore.collection("contributions")
+        CollectionReference ratingsRef = fStore.collection("contributions")
                 .document(contToRate.getPlayerId())
                 .collection("unrated")
                 .document(contToRate.getId())
                 .collection("ratings");
 
-        collectionReference.get()
+        ratingsRef.get()
                 .continueWithTask(new Continuation<QuerySnapshot, Task<List<DocumentSnapshot>>>() {
                     @Override
                     public Task<List<DocumentSnapshot>> then(@NonNull Task<QuerySnapshot> task) {
                         List<Task<DocumentSnapshot>> tasks = new ArrayList<Task<DocumentSnapshot>>();
-                        System.out.println("HEREE: " + task.getResult());
                         for (DocumentSnapshot documentSnapshot : task.getResult()){
                             tasks.add(documentSnapshot.getReference().get());
                         }
-                        System.out.println("TASKS: "+ tasks);
-                        System.out.println("TASKS len: "+ tasks.size());
+
+                        Log.d("TASKS len: ", String.valueOf(tasks.size()));
                         return Tasks.whenAllSuccess(tasks);
                     }
                 }).addOnCompleteListener(new OnCompleteListener<List<DocumentSnapshot>>() {
@@ -300,47 +282,83 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
                 // average all ratings
                 for(DocumentSnapshot documentSnapshot : list) {
                     Rating rating = documentSnapshot.toObject(Rating.class);
-                    System.out.println("RATING: " + rating);
                     ratings.add(rating);
                 }
 
-                System.out.println("RATINGS: " + ratings);
+                Log.d("Rating: ", String.valueOf(ratings));
                 int trueCount = 0;
                 for (Rating rating : ratings) {
                     if (rating.isApproval()) {
                         trueCount++;
                     }
                 }
-                System.out.println("TRUE count: " + trueCount);
+                Log.d("True count: ", String.valueOf(trueCount));
                 boolean finalRating = ((float) trueCount / (float) MAX_NUM_OF_RATINGS) > 0.5;
                 fStore.collection("contributions")
                         .document(contToRate.getPlayerId())
                         .collection("unrated")
                         .document(contToRate.getId()).update("finalRating", finalRating);
 
+                // move contribution to rated pile
+                DocumentReference contRef = fStore.collection("contributions")
+                        .document(contToRate.getPlayerId())
+                        .collection("unrated")
+                        .document(contToRate.getId());
+
+                DocumentReference newContRef = fStore.collection("contributions")
+                        .document(contToRate.getPlayerId())
+                        .collection("rated")
+                        .document(contToRate.getId());
+
+                contRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        newContRef.set(Objects.requireNonNull(documentSnapshot.getData()));
+                    }
+                });
+
+                // move ratings of rated contribution
+                CollectionReference newRatingsRef = newContRef.collection("ratings");
+                ratingsRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot querySnapshot) {
+                        for (DocumentSnapshot documentSnapshot : querySnapshot.getDocuments()){
+                            newRatingsRef.add(Objects.requireNonNull(documentSnapshot.getData()));
+                        }
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        //delete old contribution and its ratings in unrated
+                        ratingsRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot querySnapshot) {
+                                for (DocumentSnapshot documentSnapshot : querySnapshot.getDocuments()) {
+                                    documentSnapshot.getReference().delete();
+                                }
+                                Log.d(String.valueOf(ratingsRef), " ratings successfully deleted");
+                            }
+                        }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                                contRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.d(String.valueOf(contRef), " contribution successfully deleted");
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+
             }
         });
 
     }
 
-//    public void moveContribution() {
-//        DocumentReference contDocumentReference = fStore.collection("contributions")
-//                .document(contToRate.getPlayerId())
-//                .collection("unrated")
-//                .document(contToRate.getId());
-//        contDocumentReference.get()
-//                .continueWithTask(new Continuation<DocumentSnapshot, Task<? extends Object>>() {
-//                    @Override
-//                    public Task<? extends Object> then(@NonNull @org.jetbrains.annotations.NotNull Task<DocumentSnapshot> task) throws Exception {
-//                        return null;
-//                    }
-//                }).addOnCompleteListener(new OnCompleteListener<TContinuationResult>() {
-//            @Override
-//            public void onComplete(@NonNull @org.jetbrains.annotations.NotNull Task<TContinuationResult> task) {
-//
-//            }
-//        });
-//    }
 
 
     @Override

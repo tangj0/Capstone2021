@@ -98,6 +98,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         startActivityForResult(intent, requestCode);
     }
 
+//TODO
 
 //    @Override
 //    public void onClick(View v) {

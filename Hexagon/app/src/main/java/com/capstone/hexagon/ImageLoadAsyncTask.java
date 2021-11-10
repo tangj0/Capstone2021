@@ -3,49 +3,14 @@ package com.capstone.hexagon;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.widget.ImageView;
 
 import androidx.viewpager.widget.ViewPager;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
-//https://stackoverflow.com/questions/51248948/how-to-load-url-image-to-bitmap-convert-it-to-drawable-and-display-it-with-imag/51253405
-
-//public class ImageLoadAsyncTask extends AsyncTask<Void, Void, Bitmap> {
-//
-//    private String url;
-//    private ImageView imageView;
-//
-//    public ImageLoadAsyncTask(String url, ImageView imageView) {
-//        this.url = url;
-//        this.imageView = imageView;
-//    }
-//
-//    @Override
-//    protected Bitmap doInBackground(Void... params) {
-//        try {
-//            URL urlConnection = new URL(url);
-//            HttpURLConnection connection = (HttpURLConnection) urlConnection.openConnection();
-//            connection.setDoInput(true);
-//            connection.connect();
-//            InputStream input = connection.getInputStream();
-//            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-//            return myBitmap;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-//
-//    @Override
-//    protected void onPostExecute(Bitmap result) {
-//        super.onPostExecute(result);
-//        imageView.setImageBitmap(result);
-//    }
-//}
+//reference: https://stackoverflow.com/questions/51248948/how-to-load-url-image-to-bitmap-convert-it-to-drawable-and-display-it-with-imag/51253405
 
 public class ImageLoadAsyncTask extends AsyncTask<Void, Void, Bitmap[]> {
 
