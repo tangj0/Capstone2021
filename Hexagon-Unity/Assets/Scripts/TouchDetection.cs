@@ -130,9 +130,9 @@ public class TouchDetection : MonoBehaviour
                     if (grassTouched) {
                         if (Inventory.SpendGrass())
                         {
-                            for (int dx = -2; dx <= 2; dx++)
+                            for (int dx = -3; dx <= 3; dx++)
                             {
-                                for (int dy = -2; dy <= 2; dy++)
+                                for (int dy = -3; dy <= 3; dy++)
                                 {
                                     Vector3Int setCellPos = new Vector3Int(cellPos.x + dx, cellPos.y + dy, 0);
                                     if (grassTilemapCoordinates.Exists(c => c[0] == setCellPos.x && c[1] == setCellPos.y))
