@@ -59,7 +59,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/time"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton12"
@@ -70,7 +70,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageButton11"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton13"
@@ -81,7 +81,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageButton12"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton14"
@@ -92,7 +92,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageButton13"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton15"
@@ -103,7 +103,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageButton14"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton16"
@@ -114,7 +114,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageButton15"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton17"
@@ -125,7 +125,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageButton16"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton21"
@@ -136,7 +136,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton11"
         app:layout_constraintTop_toBottomOf="@id/time"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton22"
@@ -147,7 +147,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton12"
         app:layout_constraintTop_toBottomOf="@id/imageButton21"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton23"
@@ -158,7 +158,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton13"
         app:layout_constraintTop_toBottomOf="@id/imageButton22"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton24"
@@ -169,7 +169,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton14"
         app:layout_constraintTop_toBottomOf="@id/imageButton23"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton25"
@@ -180,7 +180,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton15"
         app:layout_constraintTop_toBottomOf="@id/imageButton24"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton26"
@@ -191,7 +191,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton16"
         app:layout_constraintTop_toBottomOf="@id/imageButton25"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton27"
@@ -202,7 +202,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton17"
         app:layout_constraintTop_toBottomOf="@id/imageButton26"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton31"
@@ -213,7 +213,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton21"
         app:layout_constraintTop_toBottomOf="@id/time"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton32"
@@ -224,7 +224,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton22"
         app:layout_constraintTop_toBottomOf="@id/imageButton31"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton33"
@@ -235,7 +235,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton23"
         app:layout_constraintTop_toBottomOf="@id/imageButton32"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton34"
@@ -246,7 +246,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton24"
         app:layout_constraintTop_toBottomOf="@id/imageButton33"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton35"
@@ -257,7 +257,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton25"
         app:layout_constraintTop_toBottomOf="@id/imageButton34"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton36"
@@ -268,7 +268,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton26"
         app:layout_constraintTop_toBottomOf="@id/imageButton35"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton37"
@@ -279,7 +279,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton27"
         app:layout_constraintTop_toBottomOf="@id/imageButton36"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton41"
@@ -290,7 +290,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton31"
         app:layout_constraintTop_toBottomOf="@id/time"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton42"
@@ -301,7 +301,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton32"
         app:layout_constraintTop_toBottomOf="@id/imageButton41"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton43"
@@ -312,7 +312,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton33"
         app:layout_constraintTop_toBottomOf="@id/imageButton42"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton44"
@@ -323,7 +323,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton34"
         app:layout_constraintTop_toBottomOf="@id/imageButton43"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton45"
@@ -334,7 +334,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton35"
         app:layout_constraintTop_toBottomOf="@id/imageButton44"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton46"
@@ -345,7 +345,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton36"
         app:layout_constraintTop_toBottomOf="@id/imageButton45"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton47"
@@ -356,7 +356,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton37"
         app:layout_constraintTop_toBottomOf="@id/imageButton46"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton51"
@@ -367,7 +367,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton41"
         app:layout_constraintTop_toBottomOf="@id/time"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton52"
@@ -378,7 +378,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton42"
         app:layout_constraintTop_toBottomOf="@id/imageButton51"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton53"
@@ -389,7 +389,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton43"
         app:layout_constraintTop_toBottomOf="@id/imageButton52"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton54"
@@ -400,7 +400,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton44"
         app:layout_constraintTop_toBottomOf="@id/imageButton53"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton55"
@@ -411,7 +411,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton45"
         app:layout_constraintTop_toBottomOf="@id/imageButton54"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton56"
@@ -422,7 +422,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton46"
         app:layout_constraintTop_toBottomOf="@id/imageButton55"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton57"
@@ -433,7 +433,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton47"
         app:layout_constraintTop_toBottomOf="@id/imageButton56"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton61"
@@ -444,7 +444,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton51"
         app:layout_constraintTop_toBottomOf="@id/time"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton62"
@@ -455,7 +455,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton52"
         app:layout_constraintTop_toBottomOf="@id/imageButton61"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton63"
@@ -466,7 +466,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton53"
         app:layout_constraintTop_toBottomOf="@id/imageButton62"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton64"
@@ -477,7 +477,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton54"
         app:layout_constraintTop_toBottomOf="@id/imageButton63"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton65"
@@ -488,7 +488,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton55"
         app:layout_constraintTop_toBottomOf="@id/imageButton64"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton66"
@@ -499,7 +499,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton56"
         app:layout_constraintTop_toBottomOf="@id/imageButton65"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton67"
@@ -510,7 +510,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton57"
         app:layout_constraintTop_toBottomOf="@id/imageButton66"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton71"
@@ -521,7 +521,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton61"
         app:layout_constraintTop_toBottomOf="@id/time"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton72"
@@ -532,7 +532,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton62"
         app:layout_constraintTop_toBottomOf="@id/imageButton71"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton73"
@@ -543,7 +543,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton63"
         app:layout_constraintTop_toBottomOf="@id/imageButton72"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton74"
@@ -554,7 +554,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton64"
         app:layout_constraintTop_toBottomOf="@id/imageButton73"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton75"
@@ -565,7 +565,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton65"
         app:layout_constraintTop_toBottomOf="@id/imageButton74"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton76"
@@ -576,7 +576,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton66"
         app:layout_constraintTop_toBottomOf="@id/imageButton75"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton77"
@@ -587,7 +587,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton67"
         app:layout_constraintTop_toBottomOf="@id/imageButton76"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton81"
@@ -598,7 +598,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton71"
         app:layout_constraintTop_toBottomOf="@id/time"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton82"
@@ -609,7 +609,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton72"
         app:layout_constraintTop_toBottomOf="@id/imageButton81"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton83"
@@ -620,7 +620,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton73"
         app:layout_constraintTop_toBottomOf="@id/imageButton82"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
 
     <ImageButton
         android:id="@+id/imageButton84"
@@ -631,7 +631,40 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toRightOf="@id/imageButton74"
         app:layout_constraintTop_toBottomOf="@id/imageButton83"
-        android:background="@drawable/square" />
+        android:background="@drawable/square100" />
+
+    <ImageButton
+        android:id="@+id/imageButton85"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButton75"
+        app:layout_constraintTop_toBottomOf="@id/imageButton84"
+        android:background="@drawable/square100" />
+
+    <ImageButton
+        android:id="@+id/imageButton86"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButton76"
+        app:layout_constraintTop_toBottomOf="@id/imageButton85"
+        android:background="@drawable/square100" />
+
+    <ImageButton
+        android:id="@+id/imageButton87"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButton77"
+        app:layout_constraintTop_toBottomOf="@id/imageButton86"
+        android:background="@drawable/square100" />
 
     <TextView
         android:id="@+id/mon"
@@ -664,7 +697,8 @@
         android:text="WED"
         app:layout_constraintHorizontal_chainStyle="@+id/imageButton14"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageButton14" />
+        app:layout_constraintTop_toTopOf="@+id/imageButton14"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton14" />
 
     <TextView
         android:id="@+id/tue"
@@ -719,7 +753,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/space"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex12"
@@ -730,7 +764,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex11"
         app:layout_constraintTop_toBottomOf="@id/space"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex13"
@@ -741,7 +775,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex12"
         app:layout_constraintTop_toBottomOf="@id/space"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex14"
@@ -752,7 +786,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex13"
         app:layout_constraintTop_toBottomOf="@id/space"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex15"
@@ -763,7 +797,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex14"
         app:layout_constraintTop_toBottomOf="@id/space"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex16"
@@ -774,7 +808,29 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex15"
         app:layout_constraintTop_toBottomOf="@id/space"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHex17"
+        android:layout_width="40dp"
+        android:layout_height="46.188dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButtonHex16"
+        app:layout_constraintTop_toBottomOf="@id/space"
+        android:background="@drawable/hex100" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHex18"
+        android:layout_width="40dp"
+        android:layout_height="46.188dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButtonHex17"
+        app:layout_constraintTop_toBottomOf="@id/space"
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex21"
@@ -785,7 +841,7 @@
         android:layout_marginTop="34.641dp"
         app:layout_constraintLeft_toLeftOf="@id/imageButtonHex11"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex11"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex22"
@@ -796,7 +852,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex21"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex21"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex23"
@@ -807,7 +863,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex22"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex22"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex24"
@@ -818,7 +874,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex23"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex23"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex25"
@@ -829,7 +885,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex24"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex24"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex26"
@@ -840,7 +896,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex25"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex25"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex27"
@@ -851,7 +907,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex26"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex26"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex28"
@@ -862,18 +918,19 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex27"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex27"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex31"
         android:layout_width="40dp"
         android:layout_height="46.188dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="-20dp"
+        android:layout_marginLeft="-20dp"
         android:layout_marginTop="34.641dp"
         app:layout_constraintLeft_toLeftOf="@id/imageButtonHex21"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex21"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
+
 
     <ImageButton
         android:id="@+id/imageButtonHex32"
@@ -884,7 +941,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex31"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex31"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex33"
@@ -895,7 +952,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex32"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex32"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex34"
@@ -906,7 +963,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex33"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex33"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex35"
@@ -917,7 +974,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex34"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex34"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex36"
@@ -928,7 +985,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex35"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex35"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex37"
@@ -939,7 +996,18 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex36"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex36"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHex38"
+        android:layout_width="40dp"
+        android:layout_height="46.188dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButtonHex37"
+        app:layout_constraintTop_toTopOf="@id/imageButtonHex37"
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex41"
@@ -950,7 +1018,7 @@
         android:layout_marginTop="34.641dp"
         app:layout_constraintLeft_toLeftOf="@id/imageButtonHex21"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex31"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex42"
@@ -961,7 +1029,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex41"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex41"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex43"
@@ -972,7 +1040,62 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex42"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex42"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHex44"
+        android:layout_width="40dp"
+        android:layout_height="46.188dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButtonHex43"
+        app:layout_constraintTop_toTopOf="@id/imageButtonHex43"
+        android:background="@drawable/hex100" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHex45"
+        android:layout_width="40dp"
+        android:layout_height="46.188dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButtonHex44"
+        app:layout_constraintTop_toTopOf="@id/imageButtonHex44"
+        android:background="@drawable/hex100" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHex46"
+        android:layout_width="40dp"
+        android:layout_height="46.188dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButtonHex45"
+        app:layout_constraintTop_toTopOf="@id/imageButtonHex45"
+        android:background="@drawable/hex100" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHex47"
+        android:layout_width="40dp"
+        android:layout_height="46.188dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButtonHex46"
+        app:layout_constraintTop_toTopOf="@id/imageButtonHex46"
+        android:background="@drawable/hex100" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHex48"
+        android:layout_width="40dp"
+        android:layout_height="46.188dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButtonHex47"
+        app:layout_constraintTop_toTopOf="@id/imageButtonHex47"
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex51"
@@ -981,9 +1104,9 @@
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="34.641dp"
-        app:layout_constraintLeft_toLeftOf="@id/imageButtonHex32"
+        app:layout_constraintLeft_toLeftOf="@id/imageButtonHex31"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex41"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex52"
@@ -994,7 +1117,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex51"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex51"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex53"
@@ -1005,7 +1128,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex52"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex52"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex54"
@@ -1016,7 +1139,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex53"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex53"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex55"
@@ -1027,7 +1150,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex54"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex54"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex56"
@@ -1038,7 +1161,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex55"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex55"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex57"
@@ -1049,7 +1172,18 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex56"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex56"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHex58"
+        android:layout_width="40dp"
+        android:layout_height="46.188dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButtonHex57"
+        app:layout_constraintTop_toTopOf="@id/imageButtonHex57"
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex61"
@@ -1058,9 +1192,9 @@
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="34.641dp"
-        app:layout_constraintLeft_toLeftOf="@id/imageButtonHex42"
+        app:layout_constraintLeft_toLeftOf="@id/imageButtonHex41"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex51"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex62"
@@ -1071,7 +1205,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex61"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex61"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex63"
@@ -1082,7 +1216,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex62"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex62"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
 
     <ImageButton
         android:id="@+id/imageButtonHex64"
@@ -1093,6 +1227,83 @@
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@id/imageButtonHex63"
         app:layout_constraintTop_toTopOf="@id/imageButtonHex63"
-        android:background="@drawable/hex" />
+        android:background="@drawable/hex100" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHex65"
+        android:layout_width="40dp"
+        android:layout_height="46.188dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButtonHex64"
+        app:layout_constraintTop_toTopOf="@id/imageButtonHex64"
+        android:background="@drawable/hex100" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHex66"
+        android:layout_width="40dp"
+        android:layout_height="46.188dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButtonHex65"
+        app:layout_constraintTop_toTopOf="@id/imageButtonHex65"
+        android:background="@drawable/hex100" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHex67"
+        android:layout_width="40dp"
+        android:layout_height="46.188dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButtonHex66"
+        app:layout_constraintTop_toTopOf="@id/imageButtonHex66"
+        android:background="@drawable/hex100" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHex68"
+        android:layout_width="40dp"
+        android:layout_height="46.188dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@id/imageButtonHex67"
+        app:layout_constraintTop_toTopOf="@id/imageButtonHex67"
+        android:background="@drawable/hex100" />
+
+    <TextView
+        android:id="@+id/top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:text="TOP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonHex11"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonHex11" />
+
+    <TextView
+        android:id="@+id/mid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:text="MID"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonHex31"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonHex41" />
+
+    <TextView
+        android:id="@+id/bot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:text="BOT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonHex61"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonHex61" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
