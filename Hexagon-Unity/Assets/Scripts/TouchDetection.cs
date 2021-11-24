@@ -4,11 +4,18 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System;
 using UnityEngine.UI;
+using static Biome;
 
 public class TouchDetection : MonoBehaviour
 {
+    // An instance of Random
+    public static System.Random rand = new System.Random();
+
     // Canvas
     public Transform canvas;
+
+    // Biome
+    public GameObject biome;
 
     // Grid and tilemap
     public GridLayout grid;
@@ -43,8 +50,29 @@ public class TouchDetection : MonoBehaviour
     bool plantTouched = false;
     bool treeTouched = false;
 
-    // Images
-    public Sprite test;
+    // Sprites
+    public Sprite bush1;
+    public Sprite bush2;
+    public Sprite bush3;
+    public Sprite bush4;
+    public Sprite bush5;
+    public Sprite bush6;
+    public Sprite bush7;
+    public Sprite bush8;
+    public Sprite bush9;
+    public Sprite bush10;
+    public Sprite bush11;
+    public Sprite tree1;
+    public Sprite tree2;
+    public Sprite tree3;
+    public Sprite tree4;
+    public Sprite tree5;
+    public Sprite tree6;
+    public Sprite tree7;
+    public Sprite tree8;
+    public Sprite tree9;
+    public Sprite tree10;
+
 
     private enum ItemTouched
     {
@@ -58,7 +86,6 @@ public class TouchDetection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        plant.GetComponent<Image>().sprite = test;
         tiles = new bool[MAX_GRID_X - MIN_GRID_X + 1, MAX_GRID_Y - MIN_GRID_Y + 1];
 
         // Fill in tilemapCoordinates
@@ -112,6 +139,10 @@ public class TouchDetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Set sprites
+        plant.GetComponent<Image>().sprite = GetRandomBushInBiome();
+        tree.GetComponent<Image>().sprite = GetRandomTreeInBiome();
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 worldPosFloat = Input.mousePosition;
@@ -250,5 +281,87 @@ public class TouchDetection : MonoBehaviour
         Vector3 gridPos = grid.WorldToCell(worldPos);
 
         return allTilemapCoordinates.Exists(c => c[0] == (int) gridPos.x && c[1] == (int) gridPos.y);
+    }
+
+    private Sprite GetRandomBushInBiome()
+    {
+        List<Sprite> bushes = new List<Sprite>();
+
+        switch (biome.GetComponent<Biome>().GetCurrentBiomeType())
+        {
+            case BiomeType.Temperate:
+                bushes.Add(bush7);
+                bushes.Add(bush8);
+                bushes.Add(bush9);
+                break;
+            case BiomeType.SteppeGrassland:
+                bushes.Add(bush1);
+                bushes.Add(bush2);
+                bushes.Add(bush3);
+                bushes.Add(bush4);
+                break;
+            case BiomeType.Bushland:
+                bushes.Add(bush5);
+                bushes.Add(bush6);
+                bushes.Add(bush7);
+                bushes.Add(bush8);
+                bushes.Add(bush9);
+                bushes.Add(bush10);
+                bushes.Add(bush11);
+                break;
+            case BiomeType.Borealis:
+                bushes.Add(bush7);
+                bushes.Add(bush8);
+                break;
+            case BiomeType.Greenland:
+                bushes.Add(bush1);
+                bushes.Add(bush2);
+                bushes.Add(bush3);
+                bushes.Add(bush4);
+                bushes.Add(bush10);
+                bushes.Add(bush11);
+                break;
+            case BiomeType.TropicalRainforest:
+                bushes.Add(bush7);
+                bushes.Add(bush8);
+                bushes.Add(bush9);
+                break;
+        }
+
+        return bushes[rand.Next(bushes.Count)];
+    }
+
+    private Sprite GetRandomTreeInBiome()
+    {
+        List<Sprite> trees = new List<Sprite>();
+
+        switch (biome.GetComponent<Biome>().GetCurrentBiomeType())
+        {
+            case BiomeType.Temperate:
+                trees.Add(tree4);
+                trees.Add(tree7);
+                break;
+            case BiomeType.SteppeGrassland:
+                trees.Add(tree6);
+                break;
+            case BiomeType.Bushland:
+                trees.Add(tree5);
+                break;
+            case BiomeType.Borealis:
+                trees.Add(tree1);
+                trees.Add(tree7);
+                trees.Add(tree9);
+                break;
+            case BiomeType.Greenland:
+                trees.Add(tree2);
+                break;
+            case BiomeType.TropicalRainforest:
+                trees.Add(tree3);
+                trees.Add(tree8);
+                trees.Add(tree10);
+                break;
+        }
+
+        return trees[rand.Next(trees.Count)];
     }
 }

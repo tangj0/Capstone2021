@@ -54,4 +54,9 @@ public class Biome : MonoBehaviour
                 break;
         }
     }
+
+    public BiomeType GetCurrentBiomeType()
+    {
+        return biomeType;
+    }
 }
