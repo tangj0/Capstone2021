@@ -180,7 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2f4f9ac013f45af41934296cc5a34831, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3d9f1e07aaec1f941a64a5bb0b4aa056, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7714856aa4180a049b446ea0ac949ed2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ccaf1cb991b10914e9991a09891f004e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -362,6 +362,7 @@ MonoBehaviour:
   grass: {fileID: 6598901733882079362, guid: 313368878652c0146ad7d7536508610b, type: 3}
   plant: {fileID: 7962782748541508014, guid: c34ad2c376b406144979a91fc6fb9cab, type: 3}
   tree: {fileID: 6384928778676117284, guid: 112248a614ac9ad4fb562764d66bb2a9, type: 3}
+  test: {fileID: 21300000, guid: cc7b9e286d4ae6d42adfdc7d6a60c799, type: 3}
 --- !u!4 &373772644
 Transform:
   m_ObjectHideFlags: 0
@@ -905,7 +906,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 93cd9eb07b357914997b2c367d525670, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 20f400bc4ab37494a8320838a0c2f680, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1019,6 +1020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42b4fb0a48c0a248bb3d2217452e1b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}
 --- !u!1 &1245044476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2638,6 +2640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0696cde2599a74999f5c9c4d4b85d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  biomeType: 0
 --- !u!4 &2113895265
 Transform:
   m_ObjectHideFlags: 0

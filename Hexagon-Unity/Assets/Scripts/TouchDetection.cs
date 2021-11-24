@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System;
+using UnityEngine.UI;
 
 public class TouchDetection : MonoBehaviour
 {
@@ -42,6 +43,9 @@ public class TouchDetection : MonoBehaviour
     bool plantTouched = false;
     bool treeTouched = false;
 
+    // Images
+    public Sprite test;
+
     private enum ItemTouched
     {
         plant,
@@ -54,6 +58,7 @@ public class TouchDetection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        plant.GetComponent<Image>().sprite = test;
         tiles = new bool[MAX_GRID_X - MIN_GRID_X + 1, MAX_GRID_Y - MIN_GRID_Y + 1];
 
         // Fill in tilemapCoordinates

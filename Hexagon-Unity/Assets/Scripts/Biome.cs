@@ -4,32 +4,24 @@ using UnityEngine;
 
 public class Biome : MonoBehaviour
 {
-    public BiomeType biomeType = BiomeType.biome1;
+    public BiomeType biomeType = BiomeType.Temperate;
 
     public enum BiomeType
     {
-        biome1,
-        biome2,
-        biome3,
-        biome4,
-        biome5,
-        biome6,
-        biome7,
-        biome8,
-        biome9,
-        biome10
+        Temperate,
+        SteppeGrassland,
+        Bushland,
+        Borealis,
+        Greenland,
+        TropicalRainforest
     }
 
-    private static Color color1 = Color.cyan;
-    private static Color color2 = Color.white;
-    private static Color color3 = Color.black;
-    private static Color color4 = Color.clear;
-    private static Color color5 = Color.red;
-    private static Color color6 = Color.green;
-    private static Color color7 = Color.grey;
-    private static Color color8 = Color.yellow;
-    private static Color color9 = Color.magenta;
-    private static Color color10 = Color.blue;
+    private static Color TemperateColor = new Color(255f / 255, 191f / 255, 128f / 255);
+    private static Color SteppedGrasslandColor = new Color(230f / 255, 255f / 255, 153f / 255);
+    private static Color BushlandColor = new Color(172f / 255, 230f / 255, 0f / 255);
+    private static Color BorealisColor = new Color(0f / 255, 255f / 255, 204f / 255);
+    private static Color GreenlandColor = new Color(230f / 255, 255f / 255, 255f / 255);
+    private static Color TropicalRainforestColor = new Color(0f / 255, 153f / 255, 51f / 255);
 
     // Start is called before the first frame update
     void Start()
@@ -42,35 +34,23 @@ public class Biome : MonoBehaviour
     {
         switch (biomeType)
         {
-            case BiomeType.biome1:
-                CameraSettings.SetBackgroundColor(color1);
+            case BiomeType.Temperate:
+                CameraSettings.SetBackgroundColor(TemperateColor);
                 break;
-            case BiomeType.biome2:
-                CameraSettings.SetBackgroundColor(color2);
+            case BiomeType.SteppeGrassland:
+                CameraSettings.SetBackgroundColor(SteppedGrasslandColor);
                 break;
-            case BiomeType.biome3:
-                CameraSettings.SetBackgroundColor(color3);
+            case BiomeType.Bushland:
+                CameraSettings.SetBackgroundColor(BushlandColor);
                 break;
-            case BiomeType.biome4:
-                CameraSettings.SetBackgroundColor(color4);
+            case BiomeType.Borealis:
+                CameraSettings.SetBackgroundColor(BorealisColor);
                 break;
-            case BiomeType.biome5:
-                CameraSettings.SetBackgroundColor(color5);
+            case BiomeType.Greenland:
+                CameraSettings.SetBackgroundColor(GreenlandColor);
                 break;
-            case BiomeType.biome6:
-                CameraSettings.SetBackgroundColor(color6);
-                break;
-            case BiomeType.biome7:
-                CameraSettings.SetBackgroundColor(color7);
-                break;
-            case BiomeType.biome8:
-                CameraSettings.SetBackgroundColor(color8);
-                break;
-            case BiomeType.biome9:
-                CameraSettings.SetBackgroundColor(color9);
-                break;
-            case BiomeType.biome10:
-                CameraSettings.SetBackgroundColor(color10);
+            case BiomeType.TropicalRainforest:
+                CameraSettings.SetBackgroundColor(TropicalRainforestColor);
                 break;
         }
     }
