@@ -12,21 +12,15 @@
 
     <!--Adding textAlignment="center" fixes off center blueprint screen-->
 
-    <TextView
+
+
+    <ImageView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/hexagon"
-        android:textAlignment="center"
-        android:textSize="38sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_conversion_absoluteHeight="51dp"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
         tools:layout_editor_absoluteY="316dp"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_conversion_absoluteWidth="411dp" />
+        app:srcCompat="@drawable/title" />
 
     <Space
         android:layout_width="match_parent"
