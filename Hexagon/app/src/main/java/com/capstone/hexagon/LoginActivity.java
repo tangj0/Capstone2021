@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     private Button user_stats;
+    private Button main;
 
 
 
@@ -84,6 +85,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         user_stats = (Button)findViewById(R.id.user_stat_button);
         user_stats.setOnClickListener(this);
 
+        main = (Button)findViewById(R.id.main);
+        main.setOnClickListener(this);
 
     }
 
@@ -130,7 +133,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         else if (v.getId() == R.id.user_stat_button) {
             goToUserStatPage();
         }
-
+        else if (v.getId() == R.id.main) {
+            goToMainPage();
+        }
     }
 
     private void signInWithEmailAndPassword(String email, String password) {
