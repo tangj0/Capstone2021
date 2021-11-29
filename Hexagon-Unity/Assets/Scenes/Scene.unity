@@ -230,6 +230,7 @@ RectTransform:
   - {fileID: 968090813}
   - {fileID: 115455219}
   - {fileID: 354502394}
+  - {fileID: 834985442}
   m_Father: {fileID: 1962718528}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -355,6 +356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1962718528}
+  biome: {fileID: 2113895263}
   grid: {fileID: 482911779}
   tilemap: {fileID: 1813009788}
   groundTile: {fileID: 11400000, guid: 7825537a688c7f14aa27d43baafb5843, type: 2}
@@ -362,7 +364,34 @@ MonoBehaviour:
   grass: {fileID: 6598901733882079362, guid: 313368878652c0146ad7d7536508610b, type: 3}
   plant: {fileID: 7962782748541508014, guid: c34ad2c376b406144979a91fc6fb9cab, type: 3}
   tree: {fileID: 6384928778676117284, guid: 112248a614ac9ad4fb562764d66bb2a9, type: 3}
-  test: {fileID: 21300000, guid: cc7b9e286d4ae6d42adfdc7d6a60c799, type: 3}
+  transportation: {fileID: 6384928778676117284, guid: 9b4bd57d77ffa5240b4512c5d654037a, type: 3}
+  bush1: {fileID: 21300000, guid: 44804bb5b345ec14d8617e200986775d, type: 3}
+  bush2: {fileID: 21300000, guid: 79120165acaf0c5469efe33190fdcfda, type: 3}
+  bush3: {fileID: 21300000, guid: a7e85193807f32943b7648e2d48779a9, type: 3}
+  bush4: {fileID: 21300000, guid: 8e60d9f2acee05849bbf55aa210f7009, type: 3}
+  bush5: {fileID: 21300000, guid: c76dce3628efd324f91c89a3c1938fcd, type: 3}
+  bush6: {fileID: 21300000, guid: 67c3324d5f5c3f94f903c165aad474dc, type: 3}
+  bush7: {fileID: 21300000, guid: 67c3324d5f5c3f94f903c165aad474dc, type: 3}
+  bush8: {fileID: 21300000, guid: d80fdc9823f1c754dbf505f21dfd4b3c, type: 3}
+  bush9: {fileID: 21300000, guid: a176c81484f862240a356fd7498f1685, type: 3}
+  bush10: {fileID: 21300000, guid: 0e4f68ff7a462524a8891aaeaee6c3ea, type: 3}
+  bush11: {fileID: 21300000, guid: 069b8170ea834d64e92604fdc65beeac, type: 3}
+  tree1: {fileID: 21300000, guid: 1e2242b3b75e80c4f85ae580be363e4f, type: 3}
+  tree2: {fileID: 21300000, guid: 6eb2367e657336a47a9158739235fe9e, type: 3}
+  tree3: {fileID: 21300000, guid: 01c179e0bbba76b4288d4d9fa61aa6c9, type: 3}
+  tree4: {fileID: 21300000, guid: a6a6d085e48bfaa4298b1a8bac6ec140, type: 3}
+  tree5: {fileID: 21300000, guid: 86fb6556646f49f4d9c04c6907a0af05, type: 3}
+  tree6: {fileID: 21300000, guid: e38e34b374df86d46af8ead406c0864c, type: 3}
+  tree7: {fileID: 21300000, guid: 570ac1eeaec30d94fae6583357405e15, type: 3}
+  tree8: {fileID: 21300000, guid: 4a38d2a63dcafb94e98903e379ff2d51, type: 3}
+  tree9: {fileID: 21300000, guid: 865fd607328619545812e0c23aeea7bc, type: 3}
+  tree10: {fileID: 21300000, guid: fa55d1a6cd5672d45aedff27bc4751da, type: 3}
+  transportation1: {fileID: 21300000, guid: cb50ab0f4d8feab4f9f2a6d1fc1f1dc1, type: 3}
+  transportation2: {fileID: 21300000, guid: a5f8e41e6115afc45833fda4154ba20f, type: 3}
+  transportation3: {fileID: 21300000, guid: 40c8abd4ade237543b2087736246be52, type: 3}
+  transportation4: {fileID: 21300000, guid: a6f04a6afd3a7c54cb7e873cdab31575, type: 3}
+  transportation5: {fileID: 21300000, guid: dc9eeaa1230ef7647a3a75c294027972, type: 3}
+  transportation6: {fileID: 21300000, guid: d9ae796f91d73f847970bd3e5600c58d, type: 3}
 --- !u!4 &373772644
 Transform:
   m_ObjectHideFlags: 0
@@ -707,6 +736,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 685890749}
+  m_CullTransparentMesh: 1
+--- !u!1 &834985441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 834985442}
+  - component: {fileID: 834985444}
+  - component: {fileID: 834985443}
+  m_Layer: 5
+  m_Name: Transportation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &834985442
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834985441}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 138150544}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -314, y: -218}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &834985443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834985441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 8559498561768864cb18e9910b504a85, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &834985444
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834985441}
   m_CullTransparentMesh: 1
 --- !u!1 &917101061
 GameObject:
@@ -2570,8 +2674,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -456, y: -221}
-  m_SizeDelta: {x: 220, y: 80}
+  m_AnchoredPosition: {x: -416.9758, y: -221}
+  m_SizeDelta: {x: 298.0484, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2074958816
 MonoBehaviour:

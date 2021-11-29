@@ -34,6 +34,7 @@ public class TouchDetection : MonoBehaviour
     public GameObject grass;
     public GameObject plant;
     public GameObject tree;
+    public GameObject transportation;
     private int PLANT_MIN_X = 13; // World coordinates
     private int PLANT_MAX_X = 66;
     private int PLANT_MIN_Y = 17;
@@ -46,9 +47,14 @@ public class TouchDetection : MonoBehaviour
     private int TREE_MAX_X = 206;
     private int TREE_MIN_Y = 17;
     private int TREE_MAX_Y = 67;
+    private int TRANSPORTATION_MIN_X = 236; // World coordinates
+    private int TRANSPORTATION_MAX_X = 285;
+    private int TRANSPORTATION_MIN_Y = 17;
+    private int TRANSPORTATION_MAX_Y = 67;
     bool grassTouched = false;
     bool plantTouched = false;
     bool treeTouched = false;
+    bool transportationTouched = false;
 
     // Sprites
     public Sprite bush1;
@@ -72,6 +78,12 @@ public class TouchDetection : MonoBehaviour
     public Sprite tree8;
     public Sprite tree9;
     public Sprite tree10;
+    public Sprite transportation1;
+    public Sprite transportation2;
+    public Sprite transportation3;
+    public Sprite transportation4;
+    public Sprite transportation5;
+    public Sprite transportation6;
 
 
     private enum ItemTouched
@@ -79,6 +91,7 @@ public class TouchDetection : MonoBehaviour
         plant,
         grass,
         tree,
+        transportation,
         tile,
         other
     }
@@ -142,6 +155,7 @@ public class TouchDetection : MonoBehaviour
         // Set sprites
         plant.GetComponent<Image>().sprite = GetRandomBushInBiome();
         tree.GetComponent<Image>().sprite = GetRandomTreeInBiome();
+        transportation.GetComponent<Image>().sprite = GetRandomTransportation();
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -161,6 +175,9 @@ public class TouchDetection : MonoBehaviour
                     break;
                 case ItemTouched.tree:
                     treeTouched = true;
+                    break;
+                case ItemTouched.transportation:
+                    transportationTouched = true;
                     break;
                 case ItemTouched.tile:
                     if (grassTouched) {
@@ -198,11 +215,21 @@ public class TouchDetection : MonoBehaviour
                         }
                         treeTouched = false;
                     }
+                    else if (transportationTouched)
+                    {
+                        if (Inventory.SpendTransportation())
+                        {
+                            GameObject obj = Instantiate(transportation, grid.CellToWorld(cellPos), Quaternion.identity);
+                            obj.transform.SetParent(canvas);
+                        }
+                        transportationTouched = false;
+                    }
                     break;
                 default:
                     grassTouched = false;
                     plantTouched = false;
                     treeTouched = false;
+                    transportationTouched = false;
                     break;
             }
         }
@@ -246,6 +273,10 @@ public class TouchDetection : MonoBehaviour
         {
             return ItemTouched.plant;
         }
+        else if (IsTransportationTouched(x, y))
+        {
+            return ItemTouched.transportation;
+        }
         else if (IsTileTouched(x, y))
         {
             return ItemTouched.tile;
@@ -271,6 +302,11 @@ public class TouchDetection : MonoBehaviour
     private bool IsPlantTouched(int x, int y)
     {
         return x >= PLANT_MIN_X && x <= PLANT_MAX_X && y >= PLANT_MIN_Y && y <= PLANT_MAX_Y;
+    }
+
+    private bool IsTransportationTouched(int x, int y)
+    {
+        return x >= TRANSPORTATION_MIN_X && x <= TRANSPORTATION_MAX_X && y >= TRANSPORTATION_MIN_Y && y <= TRANSPORTATION_MAX_Y;
     }
 
     // Helper function to determine if a tile is touched
@@ -363,5 +399,34 @@ public class TouchDetection : MonoBehaviour
         }
 
         return trees[rand.Next(trees.Count)];
+    }
+
+    private Sprite GetRandomTransportation()
+    {
+        List<Sprite> transportations = new List<Sprite>();
+
+        switch (biome.GetComponent<Biome>().GetCurrentBiomeType())
+        {
+            case BiomeType.Temperate:
+                transportations.Add(transportation5);
+                break;
+            case BiomeType.SteppeGrassland:
+                transportations.Add(transportation1);
+                break;
+            case BiomeType.Bushland:
+                transportations.Add(transportation3);
+                break;
+            case BiomeType.Borealis:
+                transportations.Add(transportation6);
+                break;
+            case BiomeType.Greenland:
+                transportations.Add(transportation2);
+                break;
+            case BiomeType.TropicalRainforest:
+                transportations.Add(transportation4);
+                break;
+        }
+
+        return transportations[rand.Next(transportations.Count)];
     }
 }

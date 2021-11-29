@@ -13,6 +13,9 @@ public class Inventory : MonoBehaviour
     public static readonly int TREE_WATER_COST = 2;
     public static readonly int TREE_OXYGEN_COST = 2;
     public static readonly int TREE_ENERGY_COST = 1;
+    public static readonly int TRANSPORTATION_WATER_COST = 18;
+    public static readonly int TRANSPORTATION_OXYGEN_COST = 18;
+    public static readonly int TRANSPORTATION_ENERGY_COST = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +68,20 @@ public class Inventory : MonoBehaviour
         Icons.SetWaterBalance(Icons.GetWaterBalance() - TREE_WATER_COST);
         Icons.SetOxygenBalance(Icons.GetOxygenBalance() - TREE_OXYGEN_COST);
         Icons.SetEnergyBalance(Icons.GetEnergyBalance() - TREE_ENERGY_COST);
+
+        return true;
+    }
+
+    public static bool SpendTransportation()
+    {
+        if (TRANSPORTATION_WATER_COST > Icons.GetWaterBalance() || TRANSPORTATION_OXYGEN_COST > Icons.GetOxygenBalance() || TRANSPORTATION_ENERGY_COST > Icons.GetEnergyBalance())
+        {
+            return false;
+        }
+
+        Icons.SetWaterBalance(Icons.GetWaterBalance() - TRANSPORTATION_WATER_COST);
+        Icons.SetOxygenBalance(Icons.GetOxygenBalance() - TRANSPORTATION_OXYGEN_COST);
+        Icons.SetEnergyBalance(Icons.GetEnergyBalance() - TRANSPORTATION_ENERGY_COST);
 
         return true;
     }
