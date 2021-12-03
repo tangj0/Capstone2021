@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RateActivityGlen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvRateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Rate Contribution"
+            android:textSize="25sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/before"
+                android:layout_width="360px"
+                android:layout_height="270px"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/mask_before" />
+
+            <ImageView
+                android:id="@+id/after"
+                android:layout_width="360px"
+                android:layout_height="270px"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintLeft_toRightOf="@+id/before"
+                app:layout_constraintStart_toEndOf="@+id/before"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/mask_after" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/garbageType"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/garbageTypeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Garbage Type:" />
+
+            <TextView
+                android:id="@+id/tvGarbageType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Placeholder" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/garbageAmount"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/garbageAmountName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Garbage Amount:" />
+
+            <TextView
+                android:id="@+id/tvGarbageAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Placeholder" />
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/yes"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/yes" />
+
+            <ImageButton
+                android:id="@+id/no"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/no" />
+
+            <ImageView
+                android:id="@+id/result"
+                android:layout_width="374px"
+                android:layout_height="97px"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintLeft_toLeftOf="@+id/yes"
+                app:layout_constraintRight_toRightOf="@+id/no"
+                app:layout_constraintBottom_toBottomOf="@+id/yes"
+                app:srcCompat="@drawable/yes50" />
+
+            <TextView
+                android:id="@+id/value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="50%"
+                app:layout_constraintLeft_toLeftOf="@+id/yes"
+                app:layout_constraintRight_toRightOf="@+id/no"
+                app:layout_constraintTop_toTopOf="@+id/yes" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/yourComment"
+                android:layout_width="873px"
+                android:layout_height="178px"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/left" />
+
+            <EditText
+                android:id="@+id/yourCommentTextBox"
+                android:layout_width="523px"
+                android:layout_height="178px"
+                android:layout_marginRight="75dp"
+                android:hint="Leave your comment"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="@+id/yourComment"
+                app:layout_constraintRight_toRightOf="@+id/yourComment"
+                app:layout_constraintTop_toTopOf="@+id/yourComment"
+                app:layout_constraintBottom_toBottomOf="@+id/yourComment"/>
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_marginRight="10dp"
+                app:layout_constraintRight_toRightOf="@+id/yourComment"
+                app:layout_constraintTop_toTopOf="@+id/yourComment"
+                app:layout_constraintBottom_toBottomOf="@+id/yourComment"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/comment1"
+                android:layout_width="873px"
+                android:layout_height="178px"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/right" />
+
+            <TextView
+                android:id="@+id/commentText1"
+                android:layout_width="723px"
+                android:layout_height="178px"
+                android:text="Fake!"
+                app:layout_constraintBottom_toBottomOf="@+id/comment1"
+                app:layout_constraintLeft_toLeftOf="@+id/comment1"
+                app:layout_constraintRight_toRightOf="@+id/comment1"
+                app:layout_constraintTop_toTopOf="@+id/comment1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/comment2"
+                android:layout_width="873px"
+                android:layout_height="178px"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/left" />
+
+            <TextView
+                android:id="@+id/commentText2"
+                android:layout_width="723px"
+                android:layout_height="178px"
+                android:text="Very Nice!"
+                app:layout_constraintBottom_toBottomOf="@+id/comment2"
+                app:layout_constraintLeft_toLeftOf="@+id/comment2"
+                app:layout_constraintRight_toRightOf="@+id/comment2"
+                app:layout_constraintTop_toTopOf="@+id/comment2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:layout_gravity ="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

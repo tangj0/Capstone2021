@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void goToRatePage() {
-        startActivity(new Intent(this, RateActivity.class));
+        startActivity(new Intent(this, RateActivityGlen.class));
         finish();
     }
 
