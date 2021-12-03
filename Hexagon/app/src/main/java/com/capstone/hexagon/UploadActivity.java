@@ -32,6 +32,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -47,14 +48,12 @@ import java.util.UUID;
 public class UploadActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button submitContribution;
+    private ImageButton backToMain;
     private static final int BEFORE_IMAGE_REQUEST_CODE = 1;
     private static final int AFTER_IMAGE_REQUEST_CODE = 2;
     private Bitmap beforeImage, afterImage;
     private ImageView imageViewBeforeImage, imageViewAfterImage;
     private TextView imageTV1, imageTV2;
-
-//    private static final int IMAGE_REQUEST = 3;
-//    private String imageOrder = "";
 
     private String playerId;
     private FirebaseUser player;
@@ -71,6 +70,10 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
 
         submitContribution = (Button)findViewById(R.id.btnSubmitContribution);
         submitContribution.setOnClickListener(this);
+
+        backToMain = (ImageButton) findViewById(R.id.back_button);
+        backToMain.setOnClickListener(this);
+        backToMain.setImageResource(R.drawable.logo);
 
         imageViewBeforeImage = (ImageView) findViewById(R.id.image_view_before_image);
         imageViewAfterImage = (ImageView) findViewById(R.id.image_view_after_image);
@@ -123,6 +126,14 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(UploadActivity.this, "Can't submit without Images", Toast.LENGTH_LONG).show();
             }
         }
+        else if (v.getId() == R.id.back_button){
+            goToMainPage();
+        }
+    }
+
+    private void goToMainPage() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
     @Override

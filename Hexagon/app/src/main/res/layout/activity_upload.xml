@@ -9,29 +9,51 @@
     <include layout="@layout/content_upload" />
 
     <LinearLayout
+        android:id="@+id/vertical_layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="15dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/text_view_create_contribution"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/horizontal_layout1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Create Contribution"
-            android:textSize="25sp" />
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside" />
+
+            <TextView
+                android:id="@+id/text_view_create_contribution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:text="Create Contribution"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/text_view_before_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:text="Before"
-            android:textSize="25sp" />
+            android:textColor="@color/white"
+            android:textSize="17sp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -58,9 +80,10 @@
             android:id="@+id/text_view_after_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:text="After"
-            android:textSize="25sp" />
+            android:textColor="@color/white"
+            android:textSize="17sp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -87,18 +110,20 @@
             android:id="@+id/select_garbage_type_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="7dp">
 
             <TextView
                 android:id="@+id/text_view_select_garbage_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Garbage Type:" />
+                android:text="Garbage Type:"
+                android:textColor="@color/white"/>
 
             <Spinner
                 android:id="@+id/garbageTypeOptions"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/btn_dropdown"
                 android:spinnerMode="dropdown" />
@@ -109,14 +134,16 @@
             android:id="@+id/garbageAmount"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="7dp">
 
             <TextView
                 android:id="@+id/tvGarbageAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Garbage Amount:" />
+                android:text="Garbage Amount:"
+                android:textColor="@color/white"/>
 
             <Spinner
                 android:id="@+id/garbageAmountOptions"

@@ -1,6 +1,7 @@
 package com.capstone.hexagon;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -58,6 +60,7 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
     private Spinner rateOptions;
     private final String[] approvalOptions = new String[]{"Approve", "Reject"};
     private Button retrieveContribution, submitRating;
+    private ImageButton backToMain;
     private TextView tvGarbageType, tvGarbageAmount;
     private EditText etComment;
 
@@ -94,6 +97,10 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
         retrieveContribution.setOnClickListener(this);
         submitRating = (Button) findViewById(R.id.btnSubmitRating);
         submitRating.setOnClickListener(this);
+
+        backToMain = (ImageButton) findViewById(R.id.back_button);
+        backToMain.setOnClickListener(this);
+        backToMain.setImageResource(R.drawable.logo);
 
         tvGarbageType = (TextView) findViewById(R.id.tvGarbageType);
         tvGarbageAmount = (TextView) findViewById(R.id.tvGarbageAmount);
@@ -381,5 +388,14 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
 //            System.out.println(rating.getRaterId());
 //            System.out.println(rating.isApproval());
         }
+        else if (v.getId() == R.id.back_button) {
+            goToMainPage();
+        }
     }
+
+    private void goToMainPage() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
 }
