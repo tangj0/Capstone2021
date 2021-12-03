@@ -22,7 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button logout;
     private Button upload;
-    private TextView rate; //TODO: temporary, move to camera page later
+    private Button rate;
+    private Button userStats;
 
     private ImageButton imageButton0Left;
     private ImageButton imageButton0Right;
@@ -47,15 +48,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         logout = (Button) findViewById(R.id.btnLogout);
         logout.setOnClickListener(this);
 
-        rate = (TextView)findViewById(R.id.btnRateImages);
+        rate = (Button)findViewById(R.id.btnRateImages);
         rate.setOnClickListener(this);
 
         upload = (Button)findViewById(R.id.btnUploadImages);
         upload.setOnClickListener(this);
 
-        logout.setText("Log Out");
-        rate.setText("Rate Images (Temp)");
-        upload.setText("Upload Images (Temp)");
+        userStats = (Button)findViewById(R.id.btnUserStats);
+        userStats.setOnClickListener(this);
+//        logout.setText("Log Out");
+//        rate.setText("Rate Images");
+//        upload.setText("Upload Images");
 
         imageButton1Left = (ImageButton) findViewById(R.id.imageButton1Left);
         imageButton1Mid = (ImageButton) findViewById(R.id.imageButton1Mid);
@@ -112,6 +115,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Temporary button to see upload images page
         if (v.getId() == R.id.btnUploadImages) {
             goToUploadPage();
+        }
+        if (v.getId() == R.id.btnUserStats) {
+            goToUserStatsPage();
         }
         if (v.getId() == R.id.imageButton1Mid) {
             // Go To Unity
@@ -196,6 +202,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void goToUploadPage() {
         startActivity(new Intent(this, UploadActivity.class));
+        finish();
+    }
+    private void goToUserStatsPage() {
+        startActivity(new Intent(this, UserStatsActivity.class));
         finish();
     }
 

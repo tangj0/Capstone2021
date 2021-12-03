@@ -10,9 +10,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class UserStatsActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button go_back_to_main;
+    private ImageButton go_back_to_main;
 
     private ImageButton imageButton11;
     private ImageButton imageButton12;
@@ -111,30 +114,8 @@ public class UserStatsActivity extends AppCompatActivity implements View.OnClick
     private ImageButton imageButtonHex56;
     private ImageButton imageButtonHex57;
     private ImageButton imageButtonHex58;
-    private ImageButton imageButtonHex61;
-    private ImageButton imageButtonHex62;
-    private ImageButton imageButtonHex63;
-    private ImageButton imageButtonHex64;
-    private ImageButton imageButtonHex65;
-    private ImageButton imageButtonHex66;
-    private ImageButton imageButtonHex67;
-    private ImageButton imageButtonHex68;
 
     private TextView user;
-    private TextView time;
-    private TextView space;
-
-    private TextView mon;
-    private TextView tue;
-    private TextView wed;
-    private TextView thu;
-    private TextView fri;
-    private TextView sat;
-    private TextView sun;
-
-    private TextView top;
-    private TextView mid;
-    private TextView bot;
 
     private ImageButton[] squareButtons;
     private ImageButton[] hexButtons;
@@ -145,43 +126,18 @@ public class UserStatsActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_stat);
+        setContentView(R.layout.activity_user_stats);
 
-        go_back_to_main = (Button) findViewById(R.id.back_button);
+        go_back_to_main = (ImageButton) findViewById(R.id.back_button);
         go_back_to_main.setOnClickListener(this);
+        go_back_to_main.setImageResource(R.drawable.logo);
 
         user = (TextView) findViewById(R.id.user);
-        time = (TextView) findViewById(R.id.time);
-        space = (TextView) findViewById(R.id.space);
 
-        mon = (TextView) findViewById(R.id.mon);
-        tue = (TextView) findViewById(R.id.tue);
-        wed = (TextView) findViewById(R.id.wed);
-        thu = (TextView) findViewById(R.id.thu);
-        fri = (TextView) findViewById(R.id.fri);
-        sat = (TextView) findViewById(R.id.sat);
-        sun = (TextView) findViewById(R.id.sun);
-
-        top = (TextView) findViewById(R.id.top);
-        mid = (TextView) findViewById(R.id.mid);
-        bot = (TextView) findViewById(R.id.bot);
-
-        String userName = "John";
-        user.setText("Stat of User: " + userName);
-        time.setText("Time");
-        space.setText("Space");
-
-        mon.setText("MON");
-        tue.setText("TUE");
-        wed.setText("WED");
-        thu.setText("THU");
-        fri.setText("FRI");
-        sat.setText("SAT");
-        sun.setText("SUN");
-
-        top.setText("TOP");
-        mid.setText("MID");
-        bot.setText("BOT");
+        FirebaseUser currUser = FirebaseAuth.getInstance().getCurrentUser();
+        String userUID = currUser.getUid();
+        String name = currUser.getDisplayName();
+        user.setText("Stats of: " + name);
 
         imageButton11 = (ImageButton) findViewById(R.id.imageButton11);
         imageButton12 = (ImageButton) findViewById(R.id.imageButton12);
@@ -305,7 +261,7 @@ public class UserStatsActivity extends AppCompatActivity implements View.OnClick
                 imageButton61, imageButton62, imageButton63, imageButton64, imageButton65, imageButton66, imageButton67,
                 imageButton71, imageButton72, imageButton73, imageButton74, imageButton75, imageButton76, imageButton77,
                 imageButton81, imageButton82, imageButton83, imageButton84, imageButton85, imageButton86, imageButton87};
-        timeTransparency = new int[]{39, 99, 9, 30, 45, 58, 23, 11, 49, 75, 84, 20, 21, 56, 15, 3, 61, 93, 36, 37, 44, 12, 50, 63, 59, 19, 55, 97, 27, 46, 17, 6, 28, 38, 16, 8, 18, 40, 96, 25, 85, 80, 52, 24, 13, 86, 100, 47, 78, 33, 48, 54, 91, 73, 71, 82};
+        timeTransparency = new int[]{39, 60, 9, 30, 45, 58, 23, 11, 49, 75, 84, 20, 21, 56, 15, 3, 61, 93, 36, 37, 44, 12, 50, 63, 59, 19, 55, 97, 27, 46, 17, 6, 28, 38, 16, 8, 18, 40, 96, 25, 85, 80, 52, 24, 13, 86, 100, 47, 78, 33, 48, 54, 91, 73, 71, 82};
 
         for (int i = 0; i < squareButtons.length; i++) {
             if (timeTransparency[i] == 0) {
@@ -323,10 +279,11 @@ public class UserStatsActivity extends AppCompatActivity implements View.OnClick
             else if (timeTransparency[i] < 80) {
                 squareButtons[i].setBackgroundResource(R.drawable.square80);
             }
-            else if (timeTransparency[i] < 100) {
+            else if (timeTransparency[i] <= 100) {
                 squareButtons[i].setBackgroundResource(R.drawable.square100);
             }
         }
+
 
         imageButtonHex11 = (ImageButton) findViewById(R.id.imageButtonHex11);
         imageButtonHex12 = (ImageButton) findViewById(R.id.imageButtonHex12);
@@ -368,14 +325,6 @@ public class UserStatsActivity extends AppCompatActivity implements View.OnClick
         imageButtonHex56 = (ImageButton) findViewById(R.id.imageButtonHex56);
         imageButtonHex57 = (ImageButton) findViewById(R.id.imageButtonHex57);
         imageButtonHex58 = (ImageButton) findViewById(R.id.imageButtonHex58);
-        imageButtonHex61 = (ImageButton) findViewById(R.id.imageButtonHex61);
-        imageButtonHex62 = (ImageButton) findViewById(R.id.imageButtonHex62);
-        imageButtonHex63 = (ImageButton) findViewById(R.id.imageButtonHex63);
-        imageButtonHex64 = (ImageButton) findViewById(R.id.imageButtonHex64);
-        imageButtonHex65 = (ImageButton) findViewById(R.id.imageButtonHex65);
-        imageButtonHex66 = (ImageButton) findViewById(R.id.imageButtonHex66);
-        imageButtonHex67 = (ImageButton) findViewById(R.id.imageButtonHex67);
-        imageButtonHex68 = (ImageButton) findViewById(R.id.imageButtonHex68);
 
         imageButtonHex11.setOnClickListener(this);
         imageButtonHex12.setOnClickListener(this);
@@ -417,22 +366,13 @@ public class UserStatsActivity extends AppCompatActivity implements View.OnClick
         imageButtonHex56.setOnClickListener(this);
         imageButtonHex57.setOnClickListener(this);
         imageButtonHex58.setOnClickListener(this);
-        imageButtonHex61.setOnClickListener(this);
-        imageButtonHex62.setOnClickListener(this);
-        imageButtonHex63.setOnClickListener(this);
-        imageButtonHex64.setOnClickListener(this);
-        imageButtonHex65.setOnClickListener(this);
-        imageButtonHex66.setOnClickListener(this);
-        imageButtonHex67.setOnClickListener(this);
-        imageButtonHex68.setOnClickListener(this);
 
         hexButtons = new ImageButton[] {imageButtonHex11, imageButtonHex12, imageButtonHex13, imageButtonHex14, imageButtonHex15, imageButtonHex16, imageButtonHex17, imageButtonHex18,
                 imageButtonHex21, imageButtonHex22, imageButtonHex23, imageButtonHex24, imageButtonHex25, imageButtonHex26, imageButtonHex27, imageButtonHex28,
                 imageButtonHex31, imageButtonHex32, imageButtonHex33, imageButtonHex34, imageButtonHex35, imageButtonHex36, imageButtonHex37, imageButtonHex38,
                 imageButtonHex41, imageButtonHex42, imageButtonHex43, imageButtonHex44, imageButtonHex45, imageButtonHex46, imageButtonHex47, imageButtonHex48,
-                imageButtonHex51, imageButtonHex52, imageButtonHex53, imageButtonHex54, imageButtonHex55, imageButtonHex56, imageButtonHex57, imageButtonHex58,
-                imageButtonHex61, imageButtonHex62, imageButtonHex63, imageButtonHex64, imageButtonHex65, imageButtonHex66, imageButtonHex67, imageButtonHex68};
-        spaceTransparency = new int[]{3, 52, 12, 71, 67, 64, 6, 16, 31, 59, 97, 98, 21, 90, 28, 58, 99, 87, 26, 69, 34, 62, 91, 7, 54, 44, 93, 81, 89, 36, 46, 48, 25, 84, 75, 33, 60, 57, 4, 15, 68, 22, 94, 38, 49, 79, 42, 18};
+                imageButtonHex51, imageButtonHex52, imageButtonHex53, imageButtonHex54, imageButtonHex55, imageButtonHex56, imageButtonHex57, imageButtonHex58};
+        spaceTransparency = new int[]{3, 52, 12, 71, 67, 64, 6, 16, 31, 59, 97, 98, 21, 90, 28, 58, 9, 45, 26, 69, 34, 62, 91, 7, 54, 44, 93, 81, 89, 36, 46, 48, 25, 84, 75, 33, 60, 57, 4, 15, 68, 22, 94, 38, 49, 79, 42, 18};
 
         for (int i = 0; i < hexButtons.length; i++) {
             if (spaceTransparency[i] == 0) {
@@ -752,31 +692,6 @@ public class UserStatsActivity extends AppCompatActivity implements View.OnClick
         if (v.getId() == R.id.imageButtonHex58) {
             MessageBox("Contribution of this hexagon is: " + spaceTransparency[39]);
         }
-        if (v.getId() == R.id.imageButtonHex61) {
-            MessageBox("Contribution of this hexagon is: " + spaceTransparency[40]);
-        }
-        if (v.getId() == R.id.imageButtonHex62) {
-            MessageBox("Contribution of this hexagon is: " + spaceTransparency[41]);
-        }
-        if (v.getId() == R.id.imageButtonHex63) {
-            MessageBox("Contribution of this hexagon is: " + spaceTransparency[42]);
-        }
-        if (v.getId() == R.id.imageButtonHex64) {
-            MessageBox("Contribution of this hexagon is: " + spaceTransparency[43]);
-        }
-        if (v.getId() == R.id.imageButtonHex65) {
-            MessageBox("Contribution of this hexagon is: " + spaceTransparency[44]);
-        }
-        if (v.getId() == R.id.imageButtonHex66) {
-            MessageBox("Contribution of this hexagon is: " + spaceTransparency[45]);
-        }
-        if (v.getId() == R.id.imageButtonHex67) {
-            MessageBox("Contribution of this hexagon is: " + spaceTransparency[46]);
-        }
-        if (v.getId() == R.id.imageButtonHex68) {
-            MessageBox("Contribution of this hexagon is: " + spaceTransparency[47]);
-        }
-
     }
 
     private void goToLoginPage() {

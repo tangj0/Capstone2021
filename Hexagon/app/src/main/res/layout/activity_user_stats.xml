@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_layout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/horizontal_layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp">
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside" />
+
+        <TextView
+            android:id="@+id/user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:text="Stats of: User"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Time"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontal_layout1" />
+
+
+    <LinearLayout
+        android:id="@+id/vertical_layout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/time"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="17dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14pt"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:text="MON"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15pt"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:text="TUE"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14pt"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:text="WED"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14pt"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:text="THU"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14pt"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:text="FRI"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14.5pt"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:text="SAT"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13pt"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:text="SUN"/>
+
+    </LinearLayout>
+
+    <!--    Side note: For horizontal and vertical scrollview see: -->
+    <!--    https://stackoverflow.com/questions/16623337/how-to-scroll-table-layout-in-horizontal-and-vertical-in-android/16623418 -->
+    <HorizontalScrollView
+        android:layout_marginTop="20pt"
+        android:layout_marginLeft="15pt"
+        android:layout_marginRight="15pt"
+        android:id="@+id/scrollview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbars="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/horizontal_layout1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TableLayout
+            android:id="@+id/table_layout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">  <!-- need left, right margins in individual rows for scrollview to scroll completely-->
+
+                <ImageButton
+                    android:id="@+id/imageButton11"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton21"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton31"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton41"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton51"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton61"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton71"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton81"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <ImageButton
+                    android:id="@+id/imageButton12"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton22"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton32"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton42"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton52"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton62"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton72"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton82"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <ImageButton
+                    android:id="@+id/imageButton13"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton23"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton33"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton43"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton53"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton63"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton73"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton83"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <ImageButton
+                    android:id="@+id/imageButton14"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton24"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton34"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton44"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton54"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton64"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton74"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton84"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <ImageButton
+                    android:id="@+id/imageButton15"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton25"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton35"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton45"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton55"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton65"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton75"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton85"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <ImageButton
+                    android:id="@+id/imageButton16"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton26"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton36"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton46"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton56"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton66"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton76"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton86"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <ImageButton
+                    android:id="@+id/imageButton17"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton27"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton37"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton47"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton57"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton67"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton77"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton87"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="3.5dp" />
+            </TableRow>
+        </TableLayout>
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Space"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollview1"/>
+
+    <LinearLayout
+        android:id="@+id/vertical_layout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/space"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="27dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10pt"
+            android:layout_marginBottom="40pt"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:text="TOP"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40pt"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:text="MID"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20pt"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:text="BOT"/>
+
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/scrollview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3pt"
+        android:layout_marginTop="5dp"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbars="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/space">
+
+        <TableLayout
+            android:id="@+id/table_layout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">  <!-- need left, right margins in individual rows for scrollview to scroll completely-->
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex11"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex12"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex13"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex14"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex15"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex16"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex17"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex18"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="15dp">
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex21"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex22"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex23"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex24"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex25"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex26"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex27"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex28"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex31"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex32"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex33"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex34"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex35"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex36"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex37"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex38"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="15dp">
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex41"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex42"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex43"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex44"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex45"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex46"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex47"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex48"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex51"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex52"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex53"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex54"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex55"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex56"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex57"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonHex58"
+                    android:layout_width="40dp"
+                    android:layout_height="44dp"
+                    android:layout_marginRight="6dp" />
+            </TableRow>
+        </TableLayout>
+    </HorizontalScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

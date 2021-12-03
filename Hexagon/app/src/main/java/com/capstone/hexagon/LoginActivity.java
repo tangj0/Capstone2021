@@ -81,13 +81,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Register the sign in with Google button's OnClickListener to sign in when clicked
         findViewById(R.id.google_sign_in_button).setOnClickListener(this);
 
-
-        user_stats = (Button)findViewById(R.id.user_stat_button);
-        user_stats.setOnClickListener(this);
-
-        main = (Button)findViewById(R.id.main);
-        main.setOnClickListener(this);
-
     }
 
     @Override
@@ -130,12 +123,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             signInWithEmailAndPassword(editTextEmail.getText().toString().trim(), editTextPassword.getText().toString().trim());
         }
 
-        else if (v.getId() == R.id.user_stat_button) {
-            goToUserStatPage();
-        }
-        else if (v.getId() == R.id.main) {
-            goToMainPage();
-        }
     }
 
     private void signInWithEmailAndPassword(String email, String password) {
