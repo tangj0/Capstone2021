@@ -121,8 +121,8 @@
 
             <ImageButton
                 android:id="@+id/yes"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -131,8 +131,8 @@
 
             <ImageButton
                 android:id="@+id/no"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="15dp"
                 app:layout_constraintRight_toRightOf="parent"
@@ -143,7 +143,7 @@
                 android:id="@+id/result"
                 android:layout_width="249.33px"
                 android:layout_height="64.67px"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="5dp"
                 app:layout_constraintLeft_toLeftOf="@+id/yes"
                 app:layout_constraintRight_toRightOf="@+id/no"
                 app:layout_constraintBottom_toBottomOf="@+id/yes" />
@@ -152,7 +152,7 @@
                 android:id="@+id/value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:text="50%"
                 app:layout_constraintLeft_toLeftOf="@+id/yes"
                 app:layout_constraintRight_toRightOf="@+id/no"
