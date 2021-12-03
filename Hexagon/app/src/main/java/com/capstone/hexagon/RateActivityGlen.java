@@ -58,6 +58,8 @@ public class RateActivityGlen extends AppCompatActivity implements View.OnClickL
     private ViewPager viewPager;
     private Adapter adapter;
 
+    private ImageButton backToMain;
+
     private TextView tvRateTitle;
     private TextView garbageTypeName;
     private TextView tvGarbageType;
@@ -91,6 +93,10 @@ public class RateActivityGlen extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate_glen);
+
+        backToMain = (ImageButton) findViewById(R.id.back_button);
+        backToMain.setOnClickListener(this);
+        backToMain.setImageResource(R.drawable.logo);
 
         tvRateTitle = (TextView) findViewById(R.id.tvRateTitle);
         tvRateTitle.setText("Rate Contribution");
@@ -172,5 +178,12 @@ public class RateActivityGlen extends AppCompatActivity implements View.OnClickL
             before.setBackgroundResource(R.drawable.mask_before2);
             after.setBackgroundResource(R.drawable.mask_after2);
         }
+        if (v.getId() == R.id.back_button) {
+            goToMainPage();
+        }
+    }
+    private void goToMainPage() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }

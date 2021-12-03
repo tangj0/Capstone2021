@@ -15,11 +15,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="20dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside" />
+
         <TextView
             android:id="@+id/tvRateTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
             android:text="Rate Contribution"
             android:textSize="25sp" />
 
@@ -33,9 +42,9 @@
 
             <ImageView
                 android:id="@+id/before"
-                android:layout_width="360px"
-                android:layout_height="270px"
-                android:layout_marginLeft="20dp"
+                android:layout_width="280px"
+                android:layout_height="210px"
+                android:layout_marginLeft="15dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -43,8 +52,8 @@
 
             <ImageView
                 android:id="@+id/after"
-                android:layout_width="360px"
-                android:layout_height="270px"
+                android:layout_width="280px"
+                android:layout_height="210px"
                 android:layout_marginLeft="20dp"
                 app:layout_constraintLeft_toRightOf="@+id/before"
                 app:layout_constraintStart_toEndOf="@+id/before"
@@ -64,6 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginLeft="15dp"
                 android:text="Garbage Type:" />
 
             <TextView
@@ -85,6 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginLeft="15dp"
                 android:text="Garbage Amount:" />
 
             <TextView
@@ -104,8 +115,8 @@
                 android:id="@+id/yes"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@drawable/yes" />
@@ -114,16 +125,16 @@
                 android:id="@+id/no"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@drawable/no" />
 
             <ImageView
                 android:id="@+id/result"
-                android:layout_width="374px"
-                android:layout_height="97px"
+                android:layout_width="249.33px"
+                android:layout_height="64.67px"
                 android:layout_marginBottom="10dp"
                 app:layout_constraintLeft_toLeftOf="@+id/yes"
                 app:layout_constraintRight_toRightOf="@+id/no"
@@ -149,8 +160,8 @@
 
             <ImageView
                 android:id="@+id/yourComment"
-                android:layout_width="873px"
-                android:layout_height="178px"
+                android:layout_width="582px"
+                android:layout_height="118.67px"
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -161,8 +172,8 @@
 
             <EditText
                 android:id="@+id/yourCommentTextBox"
-                android:layout_width="523px"
-                android:layout_height="178px"
+                android:layout_width="332px"
+                android:layout_height="118.67px"
                 android:layout_marginRight="75dp"
                 android:hint="Leave your comment"
                 android:textSize="15sp"
@@ -190,8 +201,8 @@
 
             <ImageView
                 android:id="@+id/comment1"
-                android:layout_width="873px"
-                android:layout_height="178px"
+                android:layout_width="582px"
+                android:layout_height="118.67px"
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -202,8 +213,8 @@
 
             <TextView
                 android:id="@+id/commentText1"
-                android:layout_width="723px"
-                android:layout_height="178px"
+                android:layout_width="482px"
+                android:layout_height="118.67px"
                 android:text="Fake!"
                 app:layout_constraintBottom_toBottomOf="@+id/comment1"
                 app:layout_constraintLeft_toLeftOf="@+id/comment1"
@@ -218,8 +229,8 @@
 
             <ImageView
                 android:id="@+id/comment2"
-                android:layout_width="873px"
-                android:layout_height="178px"
+                android:layout_width="582px"
+                android:layout_height="118.67px"
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -230,8 +241,8 @@
 
             <TextView
                 android:id="@+id/commentText2"
-                android:layout_width="723px"
-                android:layout_height="178px"
+                android:layout_width="482px"
+                android:layout_height="118.67px"
                 android:text="Very Nice!"
                 app:layout_constraintBottom_toBottomOf="@+id/comment2"
                 app:layout_constraintLeft_toLeftOf="@+id/comment2"
