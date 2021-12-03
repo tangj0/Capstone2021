@@ -33,6 +33,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".RateActivity" />
         <activity android:name=".UserStatsActivity" />
+        <activity android:name=".RateActivityGlen" />
     </application>
 
 </manifest>

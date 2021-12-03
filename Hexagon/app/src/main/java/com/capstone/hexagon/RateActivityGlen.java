@@ -22,6 +22,8 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.tasks.Continuation;
@@ -88,6 +90,7 @@ public class RateActivityGlen extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_rate_glen);
 
         tvRateTitle = (TextView) findViewById(R.id.tvRateTitle);
         tvRateTitle.setText("Rate Contribution");
@@ -120,18 +123,18 @@ public class RateActivityGlen extends AppCompatActivity implements View.OnClickL
         value.setText("AI recommendation: Valid");
 
         yourComment = (ImageView) findViewById(R.id.yourComment);
-        comment1.setBackgroundResource(R.drawable.left);
+        yourComment.setImageResource(R.drawable.left);
         yourCommentTextBox = (EditText) findViewById(R.id.yourCommentTextBox);
         submit = (Button) findViewById(R.id.submit);
         submit.setOnClickListener(this);
 
         comment1 = (ImageView) findViewById(R.id.comment1);
-        comment1.setBackgroundResource(R.drawable.right);
+        comment1.setImageResource(R.drawable.right);
         commentText1 = (TextView) findViewById(R.id.commentText1);
         commentText1.setText("Fake!");
 
         comment2 = (ImageView) findViewById(R.id.comment2);
-        comment2.setBackgroundResource(R.drawable.left);
+        comment2.setImageResource(R.drawable.left);
         commentText2 = (TextView) findViewById(R.id.commentText2);
         commentText2.setText("Very Nice!");
 
