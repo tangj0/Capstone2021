@@ -117,7 +117,7 @@ public class RateActivityGlen extends AppCompatActivity implements View.OnClickL
         after.setBackgroundResource(R.drawable.mask_after);
 
         value = (TextView) findViewById(R.id.value);
-        value.setText(" ");
+        value.setText("AI recommendation: Valid");
 
         yourComment = (ImageView) findViewById(R.id.yourComment);
         comment1.setBackgroundResource(R.drawable.left);
