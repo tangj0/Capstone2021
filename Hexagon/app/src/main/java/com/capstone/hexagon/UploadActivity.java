@@ -1,7 +1,9 @@
 package com.capstone.hexagon;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -24,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -31,23 +34,28 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 public class UploadActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button uploadBefore, uploadAfter, submitContribution;
+    private Button submitContribution;
     private static final int BEFORE_IMAGE_REQUEST_CODE = 1;
     private static final int AFTER_IMAGE_REQUEST_CODE = 2;
     private Bitmap beforeImage, afterImage;
     private ImageView imageViewBeforeImage, imageViewAfterImage;
+    private TextView imageTV1, imageTV2;
 
-    private static final int IMAGE_REQUEST = 3;
-    private String imageOrder = "";
-    private Uri uri;
+//    private static final int IMAGE_REQUEST = 3;
+//    private String imageOrder = "";
+
     private String playerId;
     private FirebaseUser player;
     private FirebaseAuth auth;
@@ -61,17 +69,16 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
 
-        uploadBefore = (Button)findViewById(R.id.btnUploadBefore);
-        uploadBefore.setOnClickListener(this);
-
-        uploadAfter = (Button)findViewById(R.id.btnUploadAfter);
-        uploadAfter.setOnClickListener(this);
-
         submitContribution = (Button)findViewById(R.id.btnSubmitContribution);
         submitContribution.setOnClickListener(this);
 
         imageViewBeforeImage = (ImageView) findViewById(R.id.image_view_before_image);
         imageViewAfterImage = (ImageView) findViewById(R.id.image_view_after_image);
+        imageViewBeforeImage.setOnClickListener(this);
+        imageViewAfterImage.setOnClickListener(this);
+
+        imageTV1 = (TextView) findViewById(R.id.image_tv1);
+        imageTV2 = (TextView) findViewById(R.id.image_tv2);
 
         garbageTypeOptions = findViewById(R.id.garbageTypeOptions);
         String[] options = new String[]{"Mask", "Plastic bottle"}; // use for readability
@@ -94,42 +101,58 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void openCamera(int requestCode) {
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        ContentValues values = new ContentValues();
         startActivityForResult(intent, requestCode);
     }
 
-//TODO
+    @Override
+    public void onClick(View v) {
+        // The Upload Before button is pressed
+        if (v.getId() == R.id.image_view_before_image) {
+            openCamera(BEFORE_IMAGE_REQUEST_CODE);
+        }
+        // The Upload After button is pressed
+        else if (v.getId() == R.id.image_view_after_image) {
+            openCamera(AFTER_IMAGE_REQUEST_CODE);
+        }
+        else if (v.getId() == R.id.btnSubmitContribution){
+            if (contribution.getBeforeImg() != null && contribution.getAfterImg() != null) {
+                submitContribution();
+            } else {
+                Toast.makeText(UploadActivity.this, "Can't submit without Images", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 
-//    @Override
-//    public void onClick(View v) {
-//        // The Upload Before button is pressed
-//        if (v.getId() == R.id.btnUploadBefore) {
-//            openCamera(BEFORE_IMAGE_REQUEST_CODE);
-//        }
-//        // The Upload After button is pressed
-//        else if (v.getId() == R.id.btnUploadAfter) {
-//            openCamera(AFTER_IMAGE_REQUEST_CODE);
-//        }
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == BEFORE_IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-//            beforeImage = (Bitmap) data.getExtras().get("data");
-//            imageViewBeforeImage.setImageBitmap(beforeImage);
-//        }
-//        if (requestCode == AFTER_IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-//            afterImage = (Bitmap) data.getExtras().get("data");
-//            imageViewAfterImage.setImageBitmap(afterImage);
-//        }
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
 
-    private void openImage() {
-        Intent intent = new Intent();
-        intent.setType("image/*"); //adding * made it work
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, IMAGE_REQUEST);
+        if (resultCode == Activity.RESULT_OK) {
+
+            if (requestCode == BEFORE_IMAGE_REQUEST_CODE){
+                beforeImage = (Bitmap) data.getExtras().get("data");
+                imageViewBeforeImage.setImageBitmap(beforeImage);
+                imageTV1.setVisibility(TextView.INVISIBLE);
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                beforeImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                byte[] imageData = baos.toByteArray();
+
+                uploadImage(imageData, "before");
+            }
+            else if (requestCode == AFTER_IMAGE_REQUEST_CODE){
+                afterImage = (Bitmap) data.getExtras().get("data");
+                imageViewAfterImage.setImageBitmap(afterImage);
+                imageTV2.setVisibility(TextView.INVISIBLE);
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                afterImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                byte[] imageData = baos.toByteArray();
+                uploadImage(imageData, "after");
+            }
+        }
     }
 
     private String getFileExtension(Uri uri){
@@ -138,16 +161,16 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    private void uploadImage() { //Upload actual image file to Storage (cloud storage)
+    private void uploadImage(byte[] imageData, String imageOrder) { //Upload actual image file to Storage (cloud storage)
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Uploading");
         pd.show();
 
-        if (uri != null) {
+        if (imageData != null) {
             UUID imageUUID = UUID.randomUUID();
             String strUUID = imageUUID.toString();
-            StorageReference imageStorageRef = storageReference.child("players/" + playerId + "/images/" + imageOrder + "/" + strUUID + "." + getFileExtension(uri));
-            imageStorageRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            StorageReference imageStorageRef = storageReference.child("players/" + playerId + "/images/" + imageOrder + "/" + strUUID + "." + ".png");
+            imageStorageRef.putBytes(imageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     pd.dismiss();
@@ -219,28 +242,4 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK){
-            uri = data.getData();
-            uploadImage();
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.btnUploadBefore){
-            imageOrder = "before";
-            openImage();
-        }
-        else if (v.getId() == R.id.btnUploadAfter){
-            imageOrder = "after";
-            openImage();
-        }
-        else if (v.getId() == R.id.btnSubmitContribution){
-            submitContribution();
-        }
-    }
 }

@@ -144,6 +144,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                     if (task.isSuccessful()){
                                         Toast.makeText(SignUpActivity.this, "You have signed up successfully!", Toast.LENGTH_LONG).show();
                                         //progressBar.setVisibility(View.INVISIBLE);
+                                        goToMainPage();
                                     }
                                     else {
                                         Toast.makeText(SignUpActivity.this, "Sign up was unsuccessful, please try again (Error code 1).", Toast.LENGTH_LONG).show();
@@ -189,6 +190,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void goToLoginPage() {
         startActivity(new Intent(this, LoginActivity.class));
+        finish();
+    }
+
+    private void goToMainPage() {
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 }

@@ -25,38 +25,34 @@
             android:text="Create Contribution"
             android:textSize="25sp" />
 
-        <LinearLayout
-            android:id="@+id/layout_upload_buttons"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_alignParentBottom="true">
-            <Button
-                android:id="@+id/btnUploadBefore"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" android:text="Upload Before">
-            </Button>
-            <Button
-                android:id="@+id/btnUploadAfter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Upload After">
-            </Button>
-        </LinearLayout>
-
         <TextView
             android:id="@+id/text_view_before_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="30dp"
             android:text="Before"
             android:textSize="25sp" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_view_before_image"
-            android:layout_width="match_parent"
-            android:layout_height="190dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_view_before_image"
+                android:layout_width="match_parent"
+                android:layout_height="190dp" />
+
+            <TextView
+                android:id="@+id/image_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Before Image"
+                android:layout_alignLeft="@+id/image_view_before_image"
+                android:layout_alignTop="@+id/image_view_before_image"
+                android:layout_alignRight="@+id/image_view_before_image"
+                android:layout_alignBottom="@+id/image_view_before_image"
+                android:gravity="center"/>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/text_view_after_image"
@@ -66,10 +62,26 @@
             android:text="After"
             android:textSize="25sp" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_view_after_image"
-            android:layout_width="match_parent"
-            android:layout_height="190dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_view_after_image"
+                android:layout_width="match_parent"
+                android:layout_height="190dp" />
+
+            <TextView
+                android:id="@+id/image_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Before Image"
+                android:layout_alignLeft="@+id/image_view_after_image"
+                android:layout_alignTop="@+id/image_view_after_image"
+                android:layout_alignRight="@+id/image_view_after_image"
+                android:layout_alignBottom="@+id/image_view_after_image"
+                android:gravity="center"/>
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/select_garbage_type_layout"
