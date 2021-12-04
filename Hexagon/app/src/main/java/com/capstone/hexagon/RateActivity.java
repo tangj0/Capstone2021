@@ -57,12 +57,14 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
     private ViewPager viewPager;
     private Adapter adapter;
 
-    private Spinner rateOptions;
-    private final String[] approvalOptions = new String[]{"Approve", "Reject"};
-    private Button retrieveContribution, submitRating;
+    private boolean approve = false;
+
+//    private Spinner rateOptions;
+//    private final String[] approvalOptions = new String[]{"Approve", "Reject"};
+//    private Button retrieveContribution, submitRating;
     private ImageButton backToMain;
     private TextView tvGarbageType, tvGarbageAmount;
-    private EditText etComment;
+//    private EditText etComment;
 
     private FirebaseAuth auth;
     private StorageReference storageReference;
@@ -81,22 +83,45 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
 
     String TAG = RateActivity.class.getSimpleName();
 
+    private ImageButton yes;
+    private ImageButton no;
+
+//    private ImageView before;
+//    private ImageView after;
+
+    private ImageView result;
+    private TextView value;
+
+    private ImageView yourComment;
+    private EditText yourCommentTextBox;
+//    private Button submit;
+
+    private ImageView comment1;
+    private TextView commentText1;
+
+    private ImageView comment2;
+    private TextView commentText2;
+
+    private Button next;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate);
 
+
+
         viewPager = findViewById(R.id.view_pager);
         adapter = new Adapter(this);
 
-        rateOptions = findViewById(R.id.spinnerRateOptions);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, approvalOptions);
-        rateOptions.setAdapter(arrayAdapter);
+//        rateOptions = findViewById(R.id.spinnerRateOptions);
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, approvalOptions);
+//        rateOptions.setAdapter(arrayAdapter);
 
-        retrieveContribution = (Button) findViewById(R.id.btnRetrieveContribution);
-        retrieveContribution.setOnClickListener(this);
-        submitRating = (Button) findViewById(R.id.btnSubmitRating);
-        submitRating.setOnClickListener(this);
+//        retrieveContribution = (Button) findViewById(R.id.btnRetrieveContribution);
+//        retrieveContribution.setOnClickListener(this);
+//        submitRating = (Button) findViewById(R.id.btnSubmitRating);
+//        submitRating.setOnClickListener(this);
 
         backToMain = (ImageButton) findViewById(R.id.back_button);
         backToMain.setOnClickListener(this);
@@ -105,7 +130,7 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
         tvGarbageType = (TextView) findViewById(R.id.tvGarbageType);
         tvGarbageAmount = (TextView) findViewById(R.id.tvGarbageAmount);
 
-        etComment = (EditText) findViewById(R.id.editTextMultiLineComment);
+//        etComment = (EditText) findViewById(R.id.editTextMultiLineComment);
 
         auth = FirebaseAuth.getInstance();
         FirebaseUser player = auth.getCurrentUser();
@@ -120,6 +145,38 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
         ratings = new ArrayList<>();
 
         getAllContributions();
+
+        yes = (ImageButton) findViewById(R.id.yes);
+        yes.setOnClickListener(this);
+        yes.setBackgroundResource(R.drawable.yes);
+        no = (ImageButton) findViewById(R.id.no);
+        no.setOnClickListener(this);
+        no.setBackgroundResource(R.drawable.no);
+
+        result = (ImageView) findViewById(R.id.result);
+        result.setBackgroundResource(R.drawable.empty);
+
+        value = (TextView) findViewById(R.id.value);
+        value.setText("Predicted: Valid");
+
+        yourComment = (ImageView) findViewById(R.id.yourComment);
+        yourComment.setImageResource(R.drawable.left);
+        yourCommentTextBox = (EditText) findViewById(R.id.yourCommentTextBox);
+//        submit = (Button) findViewById(R.id.submit);
+//        submit.setOnClickListener(this);
+
+        comment1 = (ImageView) findViewById(R.id.comment1);
+        comment1.setImageResource(R.drawable.right);
+        commentText1 = (TextView) findViewById(R.id.commentText1);
+        commentText1.setText("Fake!");
+
+        comment2 = (ImageView) findViewById(R.id.comment2);
+        comment2.setImageResource(R.drawable.left);
+        commentText2 = (TextView) findViewById(R.id.commentText2);
+        commentText2.setText("Very Nice!");
+
+        next = (Button) findViewById(R.id.next);
+        next.setOnClickListener(this);
     }
 
     // get all contributions from the "unrated" pile, from all players
@@ -201,13 +258,8 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
 
             rating.setRaterId(playerId);
 
-            if (rateOptions.getSelectedItem().toString().contentEquals(approvalOptions[0])) {
-                rating.setApproval(true);
-            }
-            else if (rateOptions.getSelectedItem().toString().contentEquals(approvalOptions[1])) {
-                rating.setApproval(false);
-            }
-            rating.setComment(etComment.getText().toString());
+            rating.setApproval(approve);
+            rating.setComment(yourCommentTextBox.getText().toString());
 
 
             // submit current rating
@@ -244,7 +296,7 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
             // automatically clear contToRate UI (don't want same user rating same cont twice)
             tvGarbageType.setText("");
             tvGarbageAmount.setText("");
-            etComment.getText().clear();
+            yourCommentTextBox.getText().clear();
 
             // clear contToRate images
             Bitmap[] clear = new Bitmap[2];
@@ -370,23 +422,58 @@ public class RateActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btnRetrieveContribution){
-//            System.out.println(contributions);
+//        if (v.getId() == R.id.btnRetrieveContribution){
+////            System.out.println(contributions);
+//            try {
+//                getContribution();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+////            System.out.println(contsToRemove);
+////            System.out.println("To RATE: " + contToRate);
+//        }
+//        else if (v.getId() == R.id.btnSubmitRating) {
+//            submitRating();
+////            System.out.println("RATING: " + rating);
+////            System.out.println(rating.getComment().toString());
+////            System.out.println(rating.getId());
+////            System.out.println(rating.getRaterId());
+////            System.out.println(rating.isApproval());
+//        }
+        if (v.getId() == R.id.back_button) {
+            goToMainPage();
+        }
+        else if (v.getId() == R.id.yes){
+            approve = true;
+            yes.setBackgroundResource(R.drawable.yestrans);
+            no.setBackgroundResource(R.drawable.notrans);
+            result.setBackgroundResource(R.drawable.yes75);
+            value.setText("76%");
+        }
+        else if (v.getId() == R.id.no){
+            approve = false;
+            yes.setBackgroundResource(R.drawable.yestrans);
+            no.setBackgroundResource(R.drawable.notrans);
+            result.setBackgroundResource(R.drawable.yes75);
+            value.setText("76%");
+        }
+        else if (v.getId() == R.id.next) {
+            submitRating();
+            yes.setBackgroundResource(R.drawable.yes);
+            no.setBackgroundResource(R.drawable.no);
+            result.setBackgroundResource(R.drawable.empty);
+            value.setText("Predicted: Invalid");
+//            submit.setAlpha(1);
+//            submit.setClickable(true);
+            commentText1.setText("I am not impressed.");
+            commentText2.setText("Thank you very much.");
+//            before.setBackgroundResource(R.drawable.mask_before2);
+//            after.setBackgroundResource(R.drawable.mask_after2);
             try {
                 getContribution();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-//            System.out.println(contsToRemove);
-//            System.out.println("To RATE: " + contToRate);
-        }
-        else if (v.getId() == R.id.btnSubmitRating) {
-            submitRating();
-//            System.out.println("RATING: " + rating);
-//            System.out.println(rating.getComment().toString());
-//            System.out.println(rating.getId());
-//            System.out.println(rating.getRaterId());
-//            System.out.println(rating.isApproval());
         }
         else if (v.getId() == R.id.back_button) {
             goToMainPage();

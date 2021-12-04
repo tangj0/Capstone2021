@@ -42,8 +42,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         mAuth = FirebaseAuth.getInstance();
 
-        title = (TextView) findViewById(R.id.tvTitle);
-        title.setOnClickListener(this); //use this to bring user back to login page by clicking on title Hexagon
+//        title = (TextView) findViewById(R.id.tvTitle);
+//        title.setOnClickListener(this); //use this to bring user back to login page by clicking on title Hexagon
 
         signUp = (Button) findViewById(R.id.btnSignUp);
         signUp.setOnClickListener(this);
@@ -61,10 +61,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     //"Resource IDs will be non-final in Android Gradle Plugin version 5.0, avoid using them in switch case statements"
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.tvTitle){
-            goToLoginPage();
-        }
-        else if (v.getId() == R.id.btnSignUp){
+//        if (v.getId() == R.id.tvTitle){
+//            goToLoginPage();
+//        }
+//        else
+        if (v.getId() == R.id.btnSignUp){
             signUp();
         }
     }

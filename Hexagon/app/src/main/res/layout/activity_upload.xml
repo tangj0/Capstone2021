@@ -68,12 +68,12 @@
                 android:id="@+id/image_tv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Upload Before Image"
                 android:layout_alignLeft="@+id/image_view_before_image"
                 android:layout_alignTop="@+id/image_view_before_image"
                 android:layout_alignRight="@+id/image_view_before_image"
                 android:layout_alignBottom="@+id/image_view_before_image"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="Upload Before Image" />
         </RelativeLayout>
 
         <TextView
@@ -98,12 +98,12 @@
                 android:id="@+id/image_tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Upload Before Image"
                 android:layout_alignLeft="@+id/image_view_after_image"
                 android:layout_alignTop="@+id/image_view_after_image"
                 android:layout_alignRight="@+id/image_view_after_image"
                 android:layout_alignBottom="@+id/image_view_after_image"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="Upload After Image" />
         </RelativeLayout>
 
         <LinearLayout

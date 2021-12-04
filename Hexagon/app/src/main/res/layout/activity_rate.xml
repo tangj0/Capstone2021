@@ -95,75 +95,149 @@
                 android:text="Placeholder" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/horizontal_layout4"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/yes"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/yes" />
+
+            <ImageButton
+                android:id="@+id/no"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/no" />
+
+            <ImageView
+                android:id="@+id/result"
+                android:layout_width="249.33px"
+                android:layout_height="64.67px"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintLeft_toLeftOf="@+id/yes"
+                app:layout_constraintRight_toRightOf="@+id/no"
+                app:layout_constraintBottom_toBottomOf="@+id/yes" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Rate Contribution:"
-                android:textColor="@color/white"/>
-
-            <Spinner
-                android:id="@+id/spinnerRateOptions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown" />
-
-        </LinearLayout>
+                android:layout_marginTop="5dp"
+                android:text="50%"
+                app:layout_constraintLeft_toLeftOf="@+id/yes"
+                app:layout_constraintRight_toRightOf="@+id/no"
+                app:layout_constraintTop_toTopOf="@+id/yes" />
 
 
-        <TextView
-            android:id="@+id/textView9"
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="45dp"
-            android:textColor="@color/white"
-            android:text="Comment on your rating:"/>
+            android:layout_height="match_parent">
 
-        <Space
-            android:id="@+id/spacer1"
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+            <ImageView
+                android:id="@+id/yourComment"
+                android:layout_width="582px"
+                android:layout_height="118.67px"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/left" />
 
-        <EditText
-            android:id="@+id/editTextMultiLineComment"
+            <EditText
+                android:id="@+id/yourCommentTextBox"
+                android:layout_width="482px"
+                android:layout_height="118.67px"
+                android:hint="Leave your comment"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="@+id/yourComment"
+                app:layout_constraintRight_toRightOf="@+id/yourComment"
+                app:layout_constraintTop_toTopOf="@+id/yourComment"
+                app:layout_constraintBottom_toBottomOf="@+id/yourComment"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="start|top"
-            android:inputType="textMultiLine"/>
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/comment1"
+                android:layout_width="582px"
+                android:layout_height="118.67px"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/right" />
+
+            <TextView
+                android:id="@+id/commentText1"
+                android:layout_width="482px"
+                android:layout_height="118.67px"
+                android:text="Fake!"
+                app:layout_constraintBottom_toBottomOf="@+id/comment1"
+                app:layout_constraintLeft_toLeftOf="@+id/comment1"
+                app:layout_constraintRight_toRightOf="@+id/comment1"
+                app:layout_constraintTop_toTopOf="@+id/comment1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/comment2"
+                android:layout_width="582px"
+                android:layout_height="118.67px"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/left" />
+
+            <TextView
+                android:id="@+id/commentText2"
+                android:layout_width="482px"
+                android:layout_height="118.67px"
+                android:text="Very Nice!"
+                app:layout_constraintBottom_toBottomOf="@+id/comment2"
+                app:layout_constraintLeft_toLeftOf="@+id/comment2"
+                app:layout_constraintRight_toRightOf="@+id/comment2"
+                app:layout_constraintTop_toTopOf="@+id/comment2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/btnSubmitRating"
-            android:layout_width="match_parent"
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Submit Rating" />
+            android:text="Next"
+            android:layout_gravity ="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnRetrieveContribution"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Get Contribution" />
-        </LinearLayout>
 
     </LinearLayout>
 
