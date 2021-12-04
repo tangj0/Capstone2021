@@ -98,7 +98,7 @@
                 android:id="@+id/image_tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Upload Before Image"
+                android:text="Upload After Image"
                 android:layout_alignLeft="@+id/image_view_after_image"
                 android:layout_alignTop="@+id/image_view_after_image"
                 android:layout_alignRight="@+id/image_view_after_image"
@@ -123,7 +123,7 @@
 
             <Spinner
                 android:id="@+id/garbageTypeOptions"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/btn_dropdown"
                 android:spinnerMode="dropdown" />

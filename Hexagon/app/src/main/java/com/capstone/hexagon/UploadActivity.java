@@ -25,8 +25,11 @@ import com.google.firebase.storage.UploadTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -41,17 +44,21 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 public class UploadActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button submitContribution;
     private ImageButton backToMain;
-    private static final int BEFORE_IMAGE_REQUEST_CODE = 1;
-    private static final int AFTER_IMAGE_REQUEST_CODE = 2;
-    private Bitmap beforeImage, afterImage;
+    private static final int CAMERA_REQUEST = 1;
+    private Bitmap imageBitmap;
+    private String imageOrder = "";
+    private Uri uri;
     private ImageView imageViewBeforeImage, imageViewAfterImage;
     private TextView imageTV1, imageTV2;
 
@@ -99,25 +106,64 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         playerId = player.getUid();
         storageReference = FirebaseStorage.getInstance().getReference();
         fStore = FirebaseFirestore.getInstance();
-        contribution = new Contribution();
-        contribution.setPlayerId(playerId);
+
+        if (contribution == null){
+            contribution = new Contribution();
+            contribution.setPlayerId(playerId);
+        }
     }
 
-    private void openCamera(int requestCode) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        ContentValues values = new ContentValues();
-        startActivityForResult(intent, requestCode);
+    private void openCamera() {
+//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "PNG_" + timeStamp + "_";
+        File storageDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/HexTempPics/");
+        File image = null;
+        try {
+            image = File.createTempFile(imageFileName, ".png", storageDir);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+//        final String dir =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+ "/HexagonPics/";
+//        File newdir = new File(dir);
+//        newdir.mkdirs();
+//        String file = dir + DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString()+".jpg";
+//
+//        File newfile = new File(file);
+//        try {
+//            newfile.createNewFile();
+//        } catch (IOException e) {}
+
+//        Uri outputFileUri = Uri.fromFile(newfile);
+//        Uri outputFileUri = FileProvider.getUriForFile(
+//                UploadActivity.this,
+//                "com.capstone.hexagon.provider", //(use your app signature + ".provider" )
+//                newfile);
+
+        Uri outputFileUri = FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()),
+                BuildConfig.APPLICATION_ID + ".provider", image);
+
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+
+        startActivityForResult(cameraIntent, CAMERA_REQUEST);
     }
+
 
     @Override
     public void onClick(View v) {
         // The Upload Before button is pressed
         if (v.getId() == R.id.image_view_before_image) {
-            openCamera(BEFORE_IMAGE_REQUEST_CODE);
+            imageOrder = "before";
+            openCamera();
         }
         // The Upload After button is pressed
         else if (v.getId() == R.id.image_view_after_image) {
-            openCamera(AFTER_IMAGE_REQUEST_CODE);
+            imageOrder = "after";
+            openCamera();
         }
         else if (v.getId() == R.id.btnSubmitContribution){
             if (contribution.getBeforeImg() != null && contribution.getAfterImg() != null) {
@@ -140,29 +186,21 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == Activity.RESULT_OK) {
-
-            if (requestCode == BEFORE_IMAGE_REQUEST_CODE){
-                beforeImage = (Bitmap) data.getExtras().get("data");
-                imageViewBeforeImage.setImageBitmap(beforeImage);
-                imageTV1.setVisibility(TextView.INVISIBLE);
-
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                beforeImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                byte[] imageData = baos.toByteArray();
-
-                uploadImage(imageData, "before");
+        if (resultCode == Activity.RESULT_OK && requestCode == CAMERA_REQUEST) {
+            File f = new File(Environment.getExternalStorageDirectory().toString());
+            for (File temp : f.listFiles()) {
+                if (temp.getName().equals("my_temp_img.jpg")) {
+                    f = temp;
+                    break;
+                }
             }
-            else if (requestCode == AFTER_IMAGE_REQUEST_CODE){
-                afterImage = (Bitmap) data.getExtras().get("data");
-                imageViewAfterImage.setImageBitmap(afterImage);
-                imageTV2.setVisibility(TextView.INVISIBLE);
-
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                afterImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                byte[] imageData = baos.toByteArray();
-                uploadImage(imageData, "after");
-            }
+            uri = Uri.fromFile(f);
+            uploadImage();
+//            imageBitmap = (Bitmap) data.getExtras().get("data");
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//            byte[] imageData = baos.toByteArray();
+//            uploadImage(imageData);
         }
     }
 
@@ -172,16 +210,16 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    private void uploadImage(byte[] imageData, String imageOrder) { //Upload actual image file to Storage (cloud storage)
+    private void uploadImage() { //Upload actual image file to Storage (cloud storage)
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Uploading");
         pd.show();
 
-        if (imageData != null) {
+        if (uri != null) {
             UUID imageUUID = UUID.randomUUID();
             String strUUID = imageUUID.toString();
-            StorageReference imageStorageRef = storageReference.child("players/" + playerId + "/images/" + imageOrder + "/" + strUUID + "." + ".png");
-            imageStorageRef.putBytes(imageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            StorageReference imageStorageRef = storageReference.child("players/" + playerId + "/images/" + imageOrder + "/" + strUUID + "." + getFileExtension(uri));
+            imageStorageRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     pd.dismiss();
@@ -196,9 +234,11 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
                             // add image link to Storage to Contribution object
                             if (imageOrder.equals("before")){
                                 contribution.setBeforeImg(downloadUri);
+                                Toast.makeText(UploadActivity.this, "Setting Before Img", Toast.LENGTH_LONG).show();
                             }
                             else if (imageOrder.equals("after")){
                                 contribution.setAfterImg(downloadUri);
+                                Toast.makeText(UploadActivity.this, "Setting After Img", Toast.LENGTH_LONG).show();
                             }
 
                         }
