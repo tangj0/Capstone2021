@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +41,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private FirebaseAuth mAuth;
 
+
+    private Button user_stats;
+    private Button main;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // Register the sign in with Google button's OnClickListener to sign in when clicked
         findViewById(R.id.google_sign_in_button).setOnClickListener(this);
+
     }
 
     @Override
@@ -251,6 +259,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void goToSignUpPage() {
         startActivity(new Intent(this, SignUpActivity.class));
+        finish();
+    }
+
+    private void goToUserStatPage() {
+        startActivity(new Intent(this, UserStatsActivity.class));
         finish();
     }
 

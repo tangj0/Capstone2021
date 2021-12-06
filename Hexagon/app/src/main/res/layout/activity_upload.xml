@@ -9,87 +9,120 @@
     <include layout="@layout/content_upload" />
 
     <LinearLayout
+        android:id="@+id/vertical_layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="15dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/text_view_create_contribution"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Create Contribution"
-            android:textSize="25sp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="15dp" />
-
         <LinearLayout
-            android:id="@+id/layout_upload_buttons"
-            android:layout_height="wrap_content"
+            android:id="@+id/horizontal_layout1"
             android:layout_width="match_parent"
-            android:layout_alignParentBottom="true">
-            <Button
-                android:id="@+id/btnUploadBefore"
-                android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside" />
+
+            <TextView
+                android:id="@+id/text_view_create_contribution"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" android:text="Upload Before">
-            </Button>
-            <Button
-                android:id="@+id/btnUploadAfter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Upload After">
-            </Button>
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:text="Create Contribution"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
         </LinearLayout>
+
 
         <TextView
             android:id="@+id/text_view_before_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:text="Before"
-            android:textSize="25sp" />
+            android:textColor="@color/white"
+            android:textSize="17sp" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_view_before_image"
-            android:layout_width="match_parent"
-            android:layout_height="220dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_view_before_image"
+                android:layout_width="match_parent"
+                android:layout_height="190dp" />
+
+            <TextView
+                android:id="@+id/image_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/image_view_before_image"
+                android:layout_alignTop="@+id/image_view_before_image"
+                android:layout_alignRight="@+id/image_view_before_image"
+                android:layout_alignBottom="@+id/image_view_before_image"
+                android:gravity="center"
+                android:text="Upload Before Image" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/text_view_after_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:text="After"
-            android:textSize="25sp" />
+            android:textColor="@color/white"
+            android:textSize="17sp" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_view_after_image"
-            android:layout_width="match_parent"
-            android:layout_height="220dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_view_after_image"
+                android:layout_width="match_parent"
+                android:layout_height="190dp" />
+
+            <TextView
+                android:id="@+id/image_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/image_view_after_image"
+                android:layout_alignTop="@+id/image_view_after_image"
+                android:layout_alignRight="@+id/image_view_after_image"
+                android:layout_alignBottom="@+id/image_view_after_image"
+                android:gravity="center"
+                android:text="Upload After Image" />
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/select_garbage_type_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="7dp">
 
             <TextView
                 android:id="@+id/text_view_select_garbage_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Select garbage type:" />
+                android:text="Garbage Type:"
+                android:textColor="@color/white"/>
 
             <Spinner
-                android:id="@+id/GarbageTypeOptions"
+                android:id="@+id/garbageTypeOptions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/btn_dropdown"
@@ -97,8 +130,31 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/garbageAmount"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="7dp">
+
+            <TextView
+                android:id="@+id/tvGarbageAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Garbage Amount:"
+                android:textColor="@color/white"/>
+
+            <Spinner
+                android:id="@+id/garbageAmountOptions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+
         <Button
-            android:id="@+id/BtnSubmitContribution"
+            android:id="@+id/btnSubmitContribution"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" android:text="Submit Contribution">
